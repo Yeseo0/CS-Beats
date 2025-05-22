@@ -1,0 +1,88 @@
+## INTRO
+
+Period: 7
+Group Members: Amy, Esther, Eve
+Group Name: G6
+Project Name: CS Beats
+
+## DESCRIPTION
+
+CS Beats is a 2000s-themed rhythm game resembling the popular Roblox game RoBeats! and  rhythm game Friday Night Funkin'. 
+
+Upon loading the game, the player will see a start screen with a play and a settings button. The settings button will allow the player to adjust the volume and background color. If the player clicks on the play button, they will be taken to a song selection screen with at least three songs. Each song will be at an easy, medium, or hard difficulty. 
+
+The player will have an avatar that they can customize by purchasing accessories from the store with stars they gain from completing songs. More difficult songs will reward more stars and unlock songs of a higher difficulty. 
+
+We will be using the Sound library for Processing to play songs and generate arrow patterns using the Amplitude and Beat Detector Analysis (arrow patterns will be generated based on music beats/volume). 
+
+## UML DIAGRAM
+
+(insert diagrams)
+- Song class
+    - Functions
+        - display each song and corresponds with arrow class
+    - Instance variables
+        - name
+        - beat detector -> feeds the speed to the arrow class
+        - Description
+        - difficulty rating/stars
+        - song -> sound library
+        - volume setting
+    - Play class
+        - Arrow class
+            - Functions
+                - song
+                - Arrow image
+                - Arrow direction
+                - How arrow moves
+                - Pvector (force) -> work it out based on bpm
+                - physically draws arrows
+            - Instance variables
+                - speed Pvector-> probably a double
+                - coordinates of arrow
+                - dull arrow
+                - accuracy increment
+            - Method
+                - draw arrow
+                - force act on arrow
+        - Functions
+            - checks progress for specific song and how many stars your at
+            - displays progress
+            - displays current scores
+            - potential combo checker
+        - Instance variables
+            - progress checker (percentage of song done)
+            - stars
+            - accuracy increment -> feeds info to arrow class
+            - frame rate
+    - Main menu class
+        - display class
+            - Functions
+                - display the songs
+                - play songs when they're scrolled onto
+                - background
+            - Instance variables
+                - array of songs
+                - array of difficulties
+                - volume setting    
+                - boolean song clicked?
+    - *if we have time do the avatar and combos/score multiplier in the play class and the shop in the main menu class*
+
+## HOW DOES IT WORK? 
+
+The objective of our game is to earn the most stars and unlock all the songs. 
+
+The song selection menu will work as a rotating menu controlled by arrows. There will be two additional buttons on top of the song selection menu: the store and the number of stars the player has.
+
+To play, the player will select a song to start. During the song, they will press one or more of the four arrow keys when the arrows slide down the screen and overlap with the corresponding arrow outlines. Depending on the arrow key that is pressed, the player's avatar will strike a different pose on the stage. 
+
+If the player successfully presses a certain percentage of arrows on time, they will be rewarded with stars:
+- 0-25% success: 1 star
+- 26-50% success: 2 stars
+- 51-65% success: 3 stars
+- 66%-79% sucess: 4 stars
+- 80-100% sucess: 5 stars
+
+In the store, there will be a variety of accessories available to purchase. The intricacy of the accessory will increase the more expensive it is. 
+
+## ADDITIONAL ILLUSTRATIONS
