@@ -1,0 +1,8 @@
+Sound Library Useful Methods:
+	- SoundFile play()
+	- SoundFile pause()
+	- SoundFile rate()
+	- SoundFile frame()
+	- AudioSample percent()
+	- PitchDetector
+	- BeatDetector
