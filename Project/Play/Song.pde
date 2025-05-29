@@ -20,4 +20,9 @@ public class Song{
   public String getRoute(){
     return route;
   }
+  
+  public int getDifficulty(){
+    return difficulty;
+  }
+  
 }
