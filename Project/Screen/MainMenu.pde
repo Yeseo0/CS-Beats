@@ -8,7 +8,13 @@
   private SoundFile[] songPreviews; // array of song preview files
   private String[] backgrounds; // array of song backgrounds
   
-  public MainMenu(){
+  public class MainMenu extends Display{
+    void display(){
+      size(1800,1000);
+      loadImage(backgrounds[backgroundIndex]);
+    }
+    
+    public MainMenu(){
      songList.add("Clarity");
      songList.add("Beauty and a Beat");
      songList.add("Are You Bored Yet?");
@@ -19,9 +25,9 @@
      difficultyList.add((double)3.0); // are you bored yet --> hard
      
      songPreviews = new SoundFile[3];
-     songPreviews[0] = new SoundFile(this, "clarity_preview.mp3");
-     songPreviews[1] = new SoundFile(this, "baab_preview.MP3");
-     songPreviews[2] = new SoundFile(this, "ayby_preview.MP3");
+     songPreviews[0] = new SoundFile(Screen.this, "Background Images/clarity_preview.MP3");
+     songPreviews[1] = new SoundFile(Screen.this, "Background Images/baab_preview.MP3");
+     songPreviews[2] = new SoundFile(Screen.this, "Background Images/ayby_preview.MP3");
      
      backgrounds = new String[3];
      backgrounds[0] = "clarityBackground.png";
@@ -58,16 +64,14 @@
     }
   }
   
-  public void setup(){
-    size(1800,1000);
-    loadImage(backgrounds[backgroundIndex]);
-  }
-  
   void mousePressed(){
     if (mouseX >= 800 && mouseX <= 1000 && mouseY >= 900 && mouseY <= 950){
-      currScreen = "Play";
+      currentScreen = "Play";
     }
     if (mouseX >= 900 && mouseX <= 950 && mouseY >= 50 && mouseY <= 100){
-      currScreen = "HomePage";
+      currentScreen = "HomePage";
     }
   }
+}
+  
+  
