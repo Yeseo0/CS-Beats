@@ -8,7 +8,6 @@
 - Functionalities:
 	- Expect to understand sound library by tomorrow
 	- Expect to further plan out methods tomorrow
-
 - Completed:
 	- Sound Library Research done
 
@@ -24,4 +23,16 @@
 	- Start planning out methods tomorrow
 - Completed:
 
+5/27/25
+- Log:
+	- Eve: 
+		- Experimented with beat detection, ultimately using FFT as it was the best beat detector out of all the Sound Library analyzing methods
+		- Created basic sample code for when arrows should fall down
+		- Expected to complete basic arrow code soon
+- Functionalities:
+- Completed:
+
+5/28/25
+- Log:
+	- 
 
