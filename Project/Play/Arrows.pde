@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 
 public class Arrows {
+<<<<<<< HEAD
   private PImage yellow, red, blue, green;
+=======
+  private PImage yellow, red, blue, green, arrowBar;
+>>>>>>> Esther
   private PVector rate;
   private ArrayList<PVector> arrows = new ArrayList<>();;
   private ArrayList<Integer> modes = new ArrayList<>();;
@@ -17,10 +21,19 @@ public class Arrows {
     red = loadImage("redArrow.gif");
     blue = loadImage("blueArrow.gif");
     green = loadImage("greenArrow.gif");
+<<<<<<< HEAD
+=======
+    arrowBar = loadImage("Arrows.png");
+  }
+  
+  void drawBar() {
+    image(arrowBar, 300, 700);
+>>>>>>> Esther
   }
   
   void drawArrow(PVector arrow, int mode) {
     if (mode==0){
+<<<<<<< HEAD
       image(red,arrow.x,arrow.y,200,200);
     }
     if (mode==1){
@@ -31,6 +44,18 @@ public class Arrows {
     }
     if (mode==3){
       image(green,arrow.x,arrow.y,200,200);
+=======
+      image(red, arrow.x,arrow.y,200,200);
+    }
+    if (mode==1){
+      image(yellow, arrow.x, arrow.y, 200,200);
+    }
+    if (mode==2){
+      image(blue, arrow.x, arrow.y,200,200);
+    }
+    if (mode==3){
+      image(green, arrow.x, arrow.y,200,200);
+>>>>>>> Esther
     }
   }
   
@@ -51,7 +76,10 @@ public class Arrows {
     
     //rotate(PI/4.0);
     //image (green, height/3.0, 325, 1200, 300);
+<<<<<<< HEAD
     rect(200, 700, 1500, 200);
+=======
+>>>>>>> Esther
     int i = 0;
     for (PVector arrow : arrows) {
       arrow = arrow.add(rate);

@@ -23,6 +23,7 @@ void setup() {
   size(1800, 1000);
   
   arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()), 0);
+<<<<<<< HEAD
   arrow.setup();
   
   sample = new SoundFile(this, songChoice[currentSong].getRoute());
@@ -52,4 +53,36 @@ void draw() {
   
   arrow.update();
   
+=======
+  
+  sample = new SoundFile(this, songChoice[currentSong].getRoute());
+  sample.loop();
+  
+  arrow.setup();
+  fft = new FFT(this, 256);
+  fft.input(sample);
+  
+}
+
+void draw() {
+  background(0);
+  arrow.drawBar();
+  fft.analyze(spectrum);
+
+  float beat = 0;
+  for (int i = 0; i < 256; i++) { // calculates total energy so knows when spikes
+    beat += spectrum[i];
+  }
+
+  if (beat > threshold && millis() - lastBeat > cooldown) {
+    lastBeat = millis(); // time of current beat
+
+    // arrows now fall with beat (need to implement delay)
+    int randomArrow = int(random(4));
+    arrow.addArrow(randomArrow);
+  }
+  
+  arrow.update();
+  
+>>>>>>> Esther
 }
