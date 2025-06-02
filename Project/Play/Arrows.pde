@@ -13,11 +13,11 @@ public class Arrows {
   }
   
   void setup() {
-    yellow = loadImage("yellowArrow.gif");
-    red = loadImage("redArrow.gif");
-    blue = loadImage("blueArrow.gif");
-    green = loadImage("greenArrow.gif");
-    arrowBar = loadImage("Arrows.png");
+    yellow = loadImage("ArrowImg/yellowArrow.gif");
+    red = loadImage("ArrowImg/redArrow.gif");
+    blue = loadImage("ArrowImg/blueArrow.gif");
+    green = loadImage("ArrowImg/greenArrow.gif");
+    arrowBar = loadImage("ArrowImg/Arrows.png");
   }
   
   void drawBar() {
@@ -45,17 +45,6 @@ public class Arrows {
   }
   
   void update() {
-    //rotate(PI/4.0);
-    //image(yellow, height/3.0, 325, 300, 300);
-    
-    //rotate(PI/4.0);
-    //image(red, height/3.0, 325, 600, 300);
-    
-    //rotate(PI/4.0);
-    //image(blue, height/3.0, 325, 900, 300);
-    
-    //rotate(PI/4.0);
-    //image (green, height/3.0, 325, 1200, 300);
     int i = 0;
     for (PVector arrow : arrows) {
       arrow = arrow.add(rate);
