@@ -24,12 +24,36 @@
 - Completed:
 
 5/27/25
-- Log:
 	- Eve: 
 		- Experimented with beat detection, ultimately using FFT as it was the best beat detector out of all the Sound Library analyzing methods
 		- Created basic sample code for when arrows should fall down
 		- Expected to complete basic arrow code soon
-- Functionalities:
-- Completed:
+	- Amy:
+		- Completed a rough draft of the MainMenu class, implementing all instance variables and methods
+		- Update Design Document for Progress Meeting 1 tomorrow
+	- Esther:
+		- Completed a rough draft of Arrow class, implementing all instance variables and methods
+
+5/28/25
+	- All: 
+		- Worked on sound detecting mechanism with FFT
+		- Arrows now fall on beat
+
+5/30/25 to 6/1/25
+	- All: fixed inheritance issues and bugs preventing sketch from running
+
+6/2/25
+	- Esther: 
+		- Making arrows the right size 
+		- Worked on making arrows fall in the right column
+		- Edited bottom arrow bar so that when an arrow is pressed the image changes color
+	Eve: 
+		- Implemented off set timer so that the player can hit the arrow on the beat 
+		- Chose stage background
+		- Deleted arrows after they go past the bottom bar
+	Amy:
+		- Updated UML diagram
+		- Created the Screen abstract class
+		- Fixed MainMenu class so it runs 
 
 
