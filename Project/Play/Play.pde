@@ -34,6 +34,7 @@ void setup() {
 
 void draw() {
   background(0);
+  arrow.drawBar();
   
   fft.analyze(spectrum);
 
@@ -49,7 +50,8 @@ void draw() {
     int randomArrow = int(random(4));
     arrow.addArrow(randomArrow);
   }
-  
+
   arrow.update();
   
+  arrow.setup();
 }
