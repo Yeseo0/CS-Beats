@@ -4,7 +4,7 @@ double progress;
 int stars;
 double accuracy;
 Song[] songChoice = {new Song("clarity", "Songs/clarity.mp3", "zedd", 3), new Song("are you bored yet?", "Songs/are you bored yet.mp3", "wallows", 2)};
-int currentSong = 0;
+int currentSong = 1;
 
 SoundFile sample;
 FFT fft;
@@ -51,12 +51,6 @@ void draw() {
     arrow.addArrow(randomArrow);
   }
 
-  arrow.update();
-  
-  sample = new SoundFile(this, songChoice[currentSong].getRoute());
-  sample.loop();
-  
+  arrow.update();  
   arrow.setup();
-  fft = new FFT(this, 256);
-  fft.input(sample);
 }
