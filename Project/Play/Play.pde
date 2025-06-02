@@ -53,10 +53,5 @@ void draw() {
 
   arrow.update();
   
-  sample = new SoundFile(this, songChoice[currentSong].getRoute());
-  sample.loop();
-  
   arrow.setup();
-  fft = new FFT(this, 256);
-  fft.input(sample);
 }
