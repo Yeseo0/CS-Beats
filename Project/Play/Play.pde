@@ -51,6 +51,11 @@ void draw() {
     arrow.addArrow(randomArrow);
   }
 
+<<<<<<< HEAD
   arrow.update();  
+=======
+  arrow.update();
+  
+>>>>>>> main
   arrow.setup();
 }
