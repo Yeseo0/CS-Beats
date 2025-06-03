@@ -13,11 +13,11 @@ public class Arrows {
   }
   
   void setup() {
-    yellow = loadImage("yellowArrow.gif");
-    red = loadImage("redArrow.gif");
-    blue = loadImage("blueArrow.gif");
-    green = loadImage("greenArrow.gif");
-    arrowBar = loadImage("Arrows.png");
+    yellow = loadImage("ArrowImg/yellowArrow.png");
+    red = loadImage("ArrowImg/redArrow.png");
+    blue = loadImage("ArrowImg/blueArrow.png");
+    green = loadImage("ArrowImg/greenArrow.png");
+    arrowBar = loadImage("ArrowImg/Arrows.png");
   }
   
   void drawBar() {
@@ -26,16 +26,16 @@ public class Arrows {
   
   void drawArrow(PVector arrow, int mode) {
     if (mode==0){
-      image(red,arrow.x,arrow.y,200,200);
+      image(red,arrow.x,arrow.y,185,185);
     }
     if (mode==1){
-      image(yellow,arrow.x,arrow.y,200,200);
+      image(yellow,arrow.x,arrow.y,185,185);
     }
     if (mode==2){
-      image(blue,arrow.x,arrow.y,200,200);
+      image(blue,arrow.x,arrow.y,185,185);
     }
     if (mode==3){
-      image(green,arrow.x,arrow.y,200,200);
+      image(green,arrow.x,arrow.y,185,185);
     }
   }
   
@@ -45,23 +45,20 @@ public class Arrows {
   }
   
   void update() {
-    //rotate(PI/4.0);
-    //image(yellow, height/3.0, 325, 300, 300);
-    
-    //rotate(PI/4.0);
-    //image(red, height/3.0, 325, 600, 300);
-    
-    //rotate(PI/4.0);
-    //image(blue, height/3.0, 325, 900, 300);
-    
-    //rotate(PI/4.0);
-    //image (green, height/3.0, 325, 1200, 300);
-    int i = 0;
-    for (PVector arrow : arrows) {
-      arrow = arrow.add(rate);
+    for (int i = arrows.size() - 1; i >= 0; i--){
+      PVector arrow = arrows.get(i);
       int mode = modes.get(i);
+      arrow.add(rate);
       drawArrow(arrow, mode);
-      i++;
+      
+      if (arrow.y > height){
+        arrows.remove(i);
+        modes.remove(i);
+      }
     }
+  }
+  
+  PVector getRate(){
+    return rate;
   }
 }

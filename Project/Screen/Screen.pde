@@ -4,8 +4,7 @@ public abstract class Display{
 }
 
 void setup(){
-  //MainMenu m = new MainMenu();
-  Play p = new Play();
+  //Play p = new Play();
   //m.display();
-  p.display();
+  //p.display();
 }
