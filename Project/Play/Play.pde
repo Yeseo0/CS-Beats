@@ -6,8 +6,8 @@ double accuracy;
 Song[] songChoice = {new Song("clarity", "Songs/clarity.mp3", "zedd", 3), new Song("are you bored yet?", "Songs/are you bored yet.mp3", "wallows", 2)};
 int currentSong = 0;
 
-SoundFile sample;
-FFT fft;
+SoundFile sample; // mp3 file
+FFT fft; // fast fourier transform (changing input from time domain to frequency domain, detects beats)
 
 float[] spectrum = new float[256]; // needs to be power of 2
 
@@ -31,6 +31,11 @@ void setup() {
   fft = new FFT(this, 256);
   fft.input(sample);
 }
+
+// need to fix: 
+// - arrows should fall down earlier than beat 
+// - arrows of same color should fall down in same column
+// - rotation thing 
 
 void draw() {
   background(0);
