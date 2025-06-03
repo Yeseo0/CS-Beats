@@ -45,7 +45,11 @@ void setup() {
   arrow.setup();
   
   sample = new SoundFile(this, songChoice[currentSong].getRoute());
-  sample.play();
+  
+  int now = millis();
+  if (cooldown <= now){
+    sample.play();
+  }
   
   fft = new FFT(this, 256);
   fft.input(sample);
@@ -73,10 +77,9 @@ void draw() {
   }
     
    if (queued && currentBeat >= nextBeat - fall){
-     delay(cooldown);
      int randomArrow = int(random(4));
-      arrow.addArrow(randomArrow);
-      queued = false;
+     arrow.addArrow(randomArrow);
+     queued = false;
    }
     
   arrow.update();
