@@ -5,6 +5,7 @@ public class Arrows {
   private PVector rate;
   private ArrayList<PVector> arrows = new ArrayList<>();;
   private ArrayList<Integer> modes = new ArrayList<>();;
+  private int score = 0;
   
   
   public Arrows(int fallRate, int mode) {
@@ -21,27 +22,32 @@ public class Arrows {
   }
   
   void drawBar() {
-    image(arrowBar, 300, 700);
+    image(arrowBar, 350, 850);
   }
   
   void drawArrow(PVector arrow, int mode) {
     if (mode==0){
-      image(red,arrow.x,arrow.y,185,185);
+      image(red,775,arrow.y,162,162);
     }
     if (mode==1){
-      image(yellow,arrow.x,arrow.y,185,185);
+      image(yellow,502,arrow.y,170,170);
     }
     if (mode==2){
-      image(blue,arrow.x,arrow.y,185,185);
+      image(blue,1007,arrow.y,167,167);
     }
     if (mode==3){
-      image(green,arrow.x,arrow.y,185,185);
+      image(green,1280,arrow.y,165,165);
     }
   }
   
   void addArrow(int mode){
     arrows.add(new PVector(200+mode*200, -50));
     modes.add(mode);
+  }
+  
+  void deleteArrow() {
+    arrows.remove(0);
+    modes.remove(0);
   }
   
   void update() {
@@ -52,13 +58,43 @@ public class Arrows {
       drawArrow(arrow, mode);
       
       if (arrow.y > height){
-        arrows.remove(i);
-        modes.remove(i);
+        deleteArrow();
+      }
+    }
+    keyPressed();
+  }
+  
+  void keyPressed() {
+    if (key == CODED) {
+      if (keyCode == LEFT) {
+        if (modes.get(0) == 0 && (arrows.get(0).y > 830 && arrows.get(0).y < 900)) {
+          deleteArrow();
+          score++;
+        }
+      } else if (keyCode == RIGHT) {
+        if (modes.get(0) == 2 && (arrows.get(0).y > 830 && arrows.get(0).y < 900)) {
+          deleteArrow();
+          score++;
+        }
+      } else if (keyCode == UP) {
+        if (modes.get(0) == 3 && (arrows.get(0).y > 830 && arrows.get(0).y < 900)) {
+          deleteArrow();
+          score++;
+        }
+      } else if (keyCode == DOWN) {
+        if (modes.get(0) == 1 && (arrows.get(0).y > 830 && arrows.get(0).y < 900)) {
+          deleteArrow();
+          score++;
+        }
       }
     }
   }
   
   PVector getRate(){
     return rate;
+  }
+  
+  int getScore() {
+    return score;
   }
 }

@@ -28,7 +28,7 @@ PImage bg;
 void setup() {
   size(1920, 1080);
   
-  bg = loadImage("Stage.png");
+  bg = loadImage("stage.png");
   
   arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()), 0);
   arrow.setup();
