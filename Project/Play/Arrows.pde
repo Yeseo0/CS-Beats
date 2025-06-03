@@ -45,12 +45,16 @@ public class Arrows {
   }
   
   void update() {
-    int i = 0;
-    for (PVector arrow : arrows) {
-      arrow = arrow.add(rate);
+    for (int i = arrows.size() - 1; i >= 0; i--){
+      PVector arrow = arrows.get(i);
       int mode = modes.get(i);
+      arrow.add(rate);
       drawArrow(arrow, mode);
-      i++;
+      
+      if (arrow.y > height){
+        arrows.remove(i);
+        modes.remove(i);
+      }
     }
   }
   
