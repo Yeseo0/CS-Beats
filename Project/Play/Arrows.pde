@@ -5,6 +5,7 @@ public class Arrows {
   private PVector rate;
   private ArrayList<PVector> arrows = new ArrayList<>();;
   private ArrayList<Integer> modes = new ArrayList<>();;
+  private int score = 0;
   
   
   public Arrows(int fallRate, int mode) {
@@ -13,29 +14,29 @@ public class Arrows {
   }
   
   void setup() {
-    yellow = loadImage("yellowArrow.gif");
-    red = loadImage("redArrow.gif");
-    blue = loadImage("blueArrow.gif");
-    green = loadImage("greenArrow.gif");
-    arrowBar = loadImage("Arrows.png");
+    yellow = loadImage("ArrowImg/yellowArrow.png");
+    red = loadImage("ArrowImg/redArrow.png");
+    blue = loadImage("ArrowImg/blueArrow.png");
+    green = loadImage("ArrowImg/greenArrow.png");
+    arrowBar = loadImage("ArrowImg/Arrows.png");
   }
   
   void drawBar() {
-    image(arrowBar, 300, 700);
+    image(arrowBar, 350, 850);
   }
   
   void drawArrow(PVector arrow, int mode) {
     if (mode==0){
-      image(red,arrow.x,arrow.y,200,200);
+      image(red,775,arrow.y,162,162);
     }
     if (mode==1){
-      image(yellow,arrow.x,arrow.y,200,200);
+      image(yellow,502,arrow.y,170,170);
     }
     if (mode==2){
-      image(blue,arrow.x,arrow.y,200,200);
+      image(blue,1007,arrow.y,167,167);
     }
     if (mode==3){
-      image(green,arrow.x,arrow.y,200,200);
+      image(green,1280,arrow.y,165,165);
     }
   }
   
@@ -44,24 +45,56 @@ public class Arrows {
     modes.add(mode);
   }
   
+  void deleteArrow() {
+    arrows.remove(0);
+    modes.remove(0);
+  }
+  
   void update() {
-    //rotate(PI/4.0);
-    //image(yellow, height/3.0, 325, 300, 300);
-    
-    //rotate(PI/4.0);
-    //image(red, height/3.0, 325, 600, 300);
-    
-    //rotate(PI/4.0);
-    //image(blue, height/3.0, 325, 900, 300);
-    
-    //rotate(PI/4.0);
-    //image (green, height/3.0, 325, 1200, 300);
-    int i = 0;
-    for (PVector arrow : arrows) {
-      arrow = arrow.add(rate);
+    for (int i = arrows.size() - 1; i >= 0; i--){
+      PVector arrow = arrows.get(i);
       int mode = modes.get(i);
+      arrow.add(rate);
       drawArrow(arrow, mode);
-      i++;
+      
+      if (arrow.y > height){
+        deleteArrow();
+      }
     }
+    keyPressed();
+  }
+  
+  void keyPressed() {
+    if (key == CODED) {
+      if (keyCode == LEFT) {
+        if (modes.get(0) == 0 && (arrows.get(0).y > 830 && arrows.get(0).y < 900)) {
+          deleteArrow();
+          score++;
+        }
+      } else if (keyCode == RIGHT) {
+        if (modes.get(0) == 2 && (arrows.get(0).y > 830 && arrows.get(0).y < 900)) {
+          deleteArrow();
+          score++;
+        }
+      } else if (keyCode == UP) {
+        if (modes.get(0) == 3 && (arrows.get(0).y > 830 && arrows.get(0).y < 900)) {
+          deleteArrow();
+          score++;
+        }
+      } else if (keyCode == DOWN) {
+        if (modes.get(0) == 1 && (arrows.get(0).y > 830 && arrows.get(0).y < 900)) {
+          deleteArrow();
+          score++;
+        }
+      }
+    }
+  }
+  
+  PVector getRate(){
+    return rate;
+  }
+  
+  int getScore() {
+    return score;
   }
 }
