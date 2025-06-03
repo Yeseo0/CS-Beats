@@ -13,10 +13,10 @@ public class Arrows {
   }
   
   void setup() {
-    yellow = loadImage("ArrowImg/yellowArrow.gif");
-    red = loadImage("ArrowImg/redArrow.gif");
-    blue = loadImage("ArrowImg/blueArrow.gif");
-    green = loadImage("ArrowImg/greenArrow.gif");
+    yellow = loadImage("ArrowImg/yellowArrow.png");
+    red = loadImage("ArrowImg/redArrow.png");
+    blue = loadImage("ArrowImg/blueArrow.png");
+    green = loadImage("ArrowImg/greenArrow.png");
     arrowBar = loadImage("ArrowImg/Arrows.png");
   }
   
@@ -26,16 +26,16 @@ public class Arrows {
   
   void drawArrow(PVector arrow, int mode) {
     if (mode==0){
-      image(red,arrow.x,arrow.y,200,200);
+      image(red,arrow.x,arrow.y,185,185);
     }
     if (mode==1){
-      image(yellow,arrow.x,arrow.y,200,200);
+      image(yellow,arrow.x,arrow.y,185,185);
     }
     if (mode==2){
-      image(blue,arrow.x,arrow.y,200,200);
+      image(blue,arrow.x,arrow.y,185,185);
     }
     if (mode==3){
-      image(green,arrow.x,arrow.y,200,200);
+      image(green,arrow.x,arrow.y,185,185);
     }
   }
   
@@ -52,5 +52,9 @@ public class Arrows {
       drawArrow(arrow, mode);
       i++;
     }
+  }
+  
+  PVector getRate(){
+    return rate;
   }
 }
