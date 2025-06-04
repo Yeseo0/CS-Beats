@@ -84,3 +84,30 @@ void draw() {
     
   arrow.update();
 }
+
+/*void keyPressed() {
+  if (key == CODED && Arrows.size() > 0) {
+    if (keyCode == LEFT) {
+      if (arrows.get(0).getMode() == 0 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+        deleteArrow();
+        score++;
+      }
+    } else if (keyCode == RIGHT) {
+      if (arrows.get(0).getMode() == 2 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+        deleteArrow();
+        score++;
+      }
+    } else if (keyCode == UP) {
+      if (arrows.get(0).getMode() == 3 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+        deleteArrow();
+        score++;
+      }
+    } else if (keyCode == DOWN) {
+      if (arrows.get(0).getMode() == 1 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+        deleteArrow();
+        score++;
+      }
+    }
+  }
+}
+*/

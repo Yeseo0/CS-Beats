@@ -49,48 +49,46 @@ public class Arrows {
     arrows.add(count);
   }
   
-  void deleteArrow() {
+  public void deleteArrow() {
     arrows.remove(0);
     arrowNames.remove(0);
   }
   
   
-  void moveArrow() {
-    Arrow store = arrows.remove(0);
-    int name = arrowNames.remove(0);
-    pastA.add(0, store);
-    pastNames.add(0, name);
-    store.getPos().add(rate);
-    drawArrow(store.getPos(), store.getMode());
+  void moveArrow(Arrow arr) {
+    if (arrowNames.contains(arr.getName()) == true && pastNames.contains(arr.getName()) == false) {
+      Arrow store = arrows.remove(0);
+      int name = arrowNames.remove(0);
+      pastA.add(store);
+      pastNames.add(name);
+      arr.setPos(arr.getPos().add(rate));
+      drawArrow(arr.getPos(), arr.getMode());
+    }
   }
-    
   
   void update() {
     for (int i = arrows.size() - 1; i >= 0; i--) {
       Arrow arr = arrows.get(i);
-      PVector arrow = arr.getPos();
-      int mode = arr.getMode();
-      if (i < pastA.size()) {
-        Arrow arrs = pastA.get(i);
-        arrs.getPos().add(rate);
-        drawArrow(arrs.getPos(), arrs.getMode());
+      if (arr.getPos().y > 900) {
+        moveArrow(arr);
       } else {
-        if (arrow.y > 900 && arrowNames.contains(arr.getName()) == true && pastNames.contains(arr.getName()) == false) {
-          moveArrow();
-        } else if (arrow.y > 900 && pastNames.size() == 0 && arrowNames.size() != 0) {
-          moveArrow();
-        } else if (arrow.y > 900 && pastNames.size() != 0 && arrowNames.size() == 0) {
-          moveArrow();
+        if (i < pastA.size()) {
+          int index = pastA.size() - 1 - i;
+          if (index < 0) {
+            index = 0;
+          }
+          Arrow arrow = pastA.get(index);
+          arrow.setPos(arrow.getPos().add(rate));
+          drawArrow(arrow.getPos(), arrow.getMode());
         }
+        arr.getPos().add(rate);
+        drawArrow(arr.getPos(), arr.getMode());
       }
-      arrow.add(rate);
-      drawArrow(arrow, mode);
     }
-    keyPressed();
   }
   
   void keyPressed() {
-    if (key == CODED) {
+    if (key == CODED && arrows.size() > 0) {
       if (keyCode == LEFT) {
         if (arrows.get(0).getMode() == 0 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
           deleteArrow();
@@ -115,11 +113,16 @@ public class Arrows {
     }
   }
   
-  PVector getRate(){
+  public PVector getRate(){
     return rate;
   }
   
-  int getScore() {
+  public int getScore() {
     return score;
   }
+  
+  public ArrayList<Arrow> getList() {
+    return arrows;
+  }
+  
 }
