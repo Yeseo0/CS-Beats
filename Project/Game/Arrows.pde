@@ -13,11 +13,11 @@ public class Arrows {
   
   public Arrows(int fallRate) {
     rate = new PVector (0, fallRate);
-    yellow = loadImage("ArrowImg/yellowArrow.png");
-    red = loadImage("ArrowImg/redArrow.png");
-    blue = loadImage("ArrowImg/blueArrow.png");
-    green = loadImage("ArrowImg/greenArrow.png");
-    arrowBar = loadImage("ArrowImg/Arrows.png");
+    yellow = loadImage("arrows/yellowArrow.png");
+    red = loadImage("arrows/redArrow.png");
+    blue = loadImage("arrows/blueArrow.png");
+    green = loadImage("arrows/greenArrow.png");
+    arrowBar = loadImage("arrows/Arrows.png");
   }
   
   void drawBar() {
