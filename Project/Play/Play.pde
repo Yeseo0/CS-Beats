@@ -41,7 +41,7 @@ void setup() {
     fall = 0;
   }
   
-  arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()), 0);
+  arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()));
   arrow.setup();
   
   sample = new SoundFile(this, songChoice[currentSong].getRoute());
@@ -83,5 +83,4 @@ void draw() {
    }
     
   arrow.update();
-  arrow.setup();
 }
