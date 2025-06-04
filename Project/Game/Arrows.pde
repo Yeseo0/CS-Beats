@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Arrows {
-  private PImage yellow, red, blue, green, arrowBar;
+  //private PImage yellow, red, blue, green, arrowBar;
   private PVector rate;
   private ArrayList<Arrow> arrows = new ArrayList<>();
   private ArrayList<Arrow> pastA = new ArrayList<>();
@@ -13,11 +13,11 @@ public class Arrows {
   
   public Arrows(int fallRate) {
     rate = new PVector (0, fallRate);
-    yellow = loadImage("arrows/yellowArrow.png");
-    red = loadImage("arrows/redArrow.png");
-    blue = loadImage("arrows/blueArrow.png");
-    green = loadImage("arrows/greenArrow.png");
-    arrowBar = loadImage("arrows/Arrows.png");
+    //yellow = loadImage("arrows/yellowArrow.png");
+    //red = loadImage("arrows/redArrow.png");
+    //blue = loadImage("arrows/blueArrow.png");
+    //green = loadImage("arrows/greenArrow.png");
+    //arrowBar = loadImage("arrows/Arrows.png");
   }
   
   void drawBar() {

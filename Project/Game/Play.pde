@@ -27,7 +27,7 @@ public class Play{
   void display() {
     size(1920, 1080);
     
-    bg = loadImage("backgrounds/stage.png");
+    bg = play;
     
     if (currentSong == 0) {
       cooldown = 500;
@@ -88,30 +88,29 @@ public class Play{
   void mousePressed(){
   }
   
-  /*void keyPressed() {
-    if (key == CODED && Arrows.size() > 0) {
+  void keyPressed() {
+    if (key == CODED && arrow.getList().size() > 0) {
       if (keyCode == LEFT) {
-        if (arrows.get(0).getMode() == 0 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
-          deleteArrow();
-          score++;
+        if (arrow.getList().get(0).getMode() == 0 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
+          arrow.deleteArrow();
+          arrow.score++;
         }
       } else if (keyCode == RIGHT) {
-        if (arrows.get(0).getMode() == 2 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
-          deleteArrow();
-          score++;
+        if (arrow.getList().get(0).getMode() == 2 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
+          arrow.deleteArrow();
+          arrow.score++;
         }
       } else if (keyCode == UP) {
-        if (arrows.get(0).getMode() == 3 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
-          deleteArrow();
-          score++;
+        if (arrow.getList().get(0).getMode() == 3 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
+          arrow.deleteArrow();
+          arrow.score++;
         }
       } else if (keyCode == DOWN) {
-        if (arrows.get(0).getMode() == 1 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
-          deleteArrow();
-          score++;
+        if (arrow.getList().get(0).getMode() == 1 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
+          arrow.deleteArrow();
+          arrow.score++;
         }
       }
     }
   }
-  */
 }

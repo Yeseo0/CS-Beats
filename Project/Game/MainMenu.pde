@@ -10,6 +10,13 @@
   private String[] backgrounds; // array of song backgrounds
   
   MainMenu(){
+     if (backgroundIndex == 0){
+       bg = main1;
+     } else if (backgroundIndex == 1){
+       bg = main2;
+     } else {
+       bg = main3;
+     }
      bg = loadImage(backgrounds[backgroundIndex]);
         
      songList.add("Clarity");
@@ -26,10 +33,6 @@
      songPreviews[1] = baab;
      songPreviews[2] = ayby;
      
-     backgrounds = new String[3];
-     backgrounds[0] = "backgrounds/clarityBackground.png";
-     backgrounds[1] = "backgrounds/baabBackground.png";
-     backgrounds[2] = "backgrounds/aybyBackground.png";
   }
   
   private void playSong(){
