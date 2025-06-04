@@ -3,16 +3,16 @@ import processing.sound.*;
 double progress;
 int stars;
 double accuracy;
-Song[] songChoice = {new Song("clarity", "Songs/clarity.mp3", "zedd", 3), new Song("are you bored yet?", "Songs/are you bored yet.mp3", "wallows", 2)};
+Song[] songChoice = {new Song("clarity", "Songs/clarity.mp3", "zedd", 3), new Song("are you bored yet?", "Songs/are you bored yet.mp3", "wallows", 1), new Song ("beauty and a beat", "Songs/beauty and a beat.mp3", "justin bieber/nicki minah", 2)};
 int currentSong = 0;
 
-SoundFile sample; // mp3 file
-FFT fft; // fast fourier transform (changing input from time domain to frequency domain, detects beats)
+SoundFile sample;
+FFT fft;
 
 float[] spectrum = new float[256]; // needs to be power of 2
 
 float threshold = 2; // minimum energy to count as a beat
-int cooldown = 300; // how long to wait between beats
+int cooldown; // how long to wait between beats
 int lastBeat = 0;
 
 int fall;
@@ -30,22 +30,31 @@ void setup() {
   
   bg = loadImage("stage.png");
   
-  arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()), 0);
+  if (currentSong == 0) {
+    cooldown = 500;
+    fall = 2730;
+  } else if (currentSong == 1) {
+    cooldown = 1000;
+    fall = 11090;
+  } else if (currentSong == 3) {
+    cooldown = 500;
+    fall = 0;
+  }
+  
+  arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()));
   arrow.setup();
   
-  fall = int(700/arrow.getRate().mag());
-  
   sample = new SoundFile(this, songChoice[currentSong].getRoute());
-  sample.loop();
+  
+  int now = millis();
+  if (cooldown <= now){
+    sample.play();
+  }
   
   fft = new FFT(this, 256);
   fft.input(sample);
+ 
 }
-
-// need to fix: 
-// - arrows should fall down earlier than beat 
-// - arrows of same color should fall down in same column
-// - rotation thing 
 
 void draw() {
   background(bg);
@@ -69,10 +78,36 @@ void draw() {
     
    if (queued && currentBeat >= nextBeat - fall){
      int randomArrow = int(random(4));
-      arrow.addArrow(randomArrow);
-      queued = false;
+     arrow.addArrow(randomArrow);
+     queued = false;
    }
     
   arrow.update();
-  arrow.setup();
 }
+
+/*void keyPressed() {
+  if (key == CODED && Arrows.size() > 0) {
+    if (keyCode == LEFT) {
+      if (arrows.get(0).getMode() == 0 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+        deleteArrow();
+        score++;
+      }
+    } else if (keyCode == RIGHT) {
+      if (arrows.get(0).getMode() == 2 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+        deleteArrow();
+        score++;
+      }
+    } else if (keyCode == UP) {
+      if (arrows.get(0).getMode() == 3 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+        deleteArrow();
+        score++;
+      }
+    } else if (keyCode == DOWN) {
+      if (arrows.get(0).getMode() == 1 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+        deleteArrow();
+        score++;
+      }
+    }
+  }
+}
+*/
