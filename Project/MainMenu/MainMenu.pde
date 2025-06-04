@@ -28,7 +28,7 @@
      backgrounds[1] = "baabBackground.png";
      backgrounds[2] = "aybyBackground.png";
      
-     currentScreen = "MainMenu";
+     //currentScreen = "MainMenu";
   }
   
   private void playSong(){
@@ -65,9 +65,9 @@
   
   void mousePressed(){
     if (mouseX >= 800 && mouseX <= 1000 && mouseY >= 900 && mouseY <= 950){
-      currScreen = "Play";
+      //currScreen = "Play";
     }
     if (mouseX >= 900 && mouseX <= 950 && mouseY >= 50 && mouseY <= 100){
-      currScreen = "HomePage";
+      //currScreen = "HomePage";
     }
   }

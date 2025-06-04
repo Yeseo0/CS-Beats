@@ -3,14 +3,16 @@ import java.util.ArrayList;
 public class Arrows {
   private PImage yellow, red, blue, green, arrowBar;
   private PVector rate;
-  private ArrayList<PVector> arrows = new ArrayList<>();;
-  private ArrayList<Integer> modes = new ArrayList<>();;
+  private ArrayList<Arrow> arrows = new ArrayList<>();
+  private ArrayList<Arrow> pastA = new ArrayList<>();
+  private ArrayList<Integer> arrowNames = new ArrayList<>();
+  private ArrayList<Integer> pastNames = new ArrayList<>();
   private int score = 0;
+  private int counter = 0;
   
   
-  public Arrows(int fallRate, int mode) {
+  public Arrows(int fallRate) {
     rate = new PVector (0, fallRate);
-    modes.add(mode);
   }
   
   void setup() {
@@ -41,48 +43,69 @@ public class Arrows {
   }
   
   void addArrow(int mode){
-    arrows.add(new PVector(200+mode*200, -50));
-    modes.add(mode);
+    Arrow count = new Arrow (new PVector (0, -50), mode, counter);
+    arrowNames.add(counter);
+    counter++;
+    arrows.add(count);
   }
   
-  void deleteArrow() {
+  public void deleteArrow() {
     arrows.remove(0);
-    modes.remove(0);
+    arrowNames.remove(0);
+  }
+  
+  
+  void moveArrow(Arrow arr) {
+    if (arrowNames.contains(arr.getName()) == true && pastNames.contains(arr.getName()) == false) {
+      Arrow store = arrows.remove(0);
+      int name = arrowNames.remove(0);
+      pastA.add(store);
+      pastNames.add(name);
+      arr.setPos(arr.getPos().add(rate));
+      drawArrow(arr.getPos(), arr.getMode());
+    }
   }
   
   void update() {
-    for (int i = arrows.size() - 1; i >= 0; i--){
-      PVector arrow = arrows.get(i);
-      int mode = modes.get(i);
-      arrow.add(rate);
-      drawArrow(arrow, mode);
-      
-      if (arrow.y > height){
-        deleteArrow();
+    for (int i = arrows.size() - 1; i >= 0; i--) {
+      Arrow arr = arrows.get(i);
+      if (arr.getPos().y > 900) {
+        moveArrow(arr);
+      } else {
+        if (i < pastA.size()) {
+          int index = pastA.size() - 1 - i;
+          if (index < 0) {
+            index = 0;
+          }
+          Arrow arrow = pastA.get(index);
+          arrow.setPos(arrow.getPos().add(rate));
+          drawArrow(arrow.getPos(), arrow.getMode());
+        }
+        arr.getPos().add(rate);
+        drawArrow(arr.getPos(), arr.getMode());
       }
     }
-    keyPressed();
   }
   
   void keyPressed() {
-    if (key == CODED) {
+    if (key == CODED && arrows.size() > 0) {
       if (keyCode == LEFT) {
-        if (modes.get(0) == 0 && (arrows.get(0).y > 830 && arrows.get(0).y < 900)) {
+        if (arrows.get(0).getMode() == 0 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
           deleteArrow();
           score++;
         }
       } else if (keyCode == RIGHT) {
-        if (modes.get(0) == 2 && (arrows.get(0).y > 830 && arrows.get(0).y < 900)) {
+        if (arrows.get(0).getMode() == 2 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
           deleteArrow();
           score++;
         }
       } else if (keyCode == UP) {
-        if (modes.get(0) == 3 && (arrows.get(0).y > 830 && arrows.get(0).y < 900)) {
+        if (arrows.get(0).getMode() == 3 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
           deleteArrow();
           score++;
         }
       } else if (keyCode == DOWN) {
-        if (modes.get(0) == 1 && (arrows.get(0).y > 830 && arrows.get(0).y < 900)) {
+        if (arrows.get(0).getMode() == 1 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
           deleteArrow();
           score++;
         }
@@ -90,11 +113,17 @@ public class Arrows {
     }
   }
   
-  PVector getRate(){
+  public PVector getRate(){
     return rate;
   }
   
-  int getScore() {
+  public int getScore() {
     return score;
   }
+  
+  public ArrayList<Arrow> getList() {
+    return arrows;
+  }
+ 
+  
 }

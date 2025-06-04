@@ -3,7 +3,7 @@ import processing.sound.*;
 double progress;
 int stars;
 double accuracy;
-Song[] songChoice = {new Song("clarity", "Songs/clarity.mp3", "zedd", 3), new Song("are you bored yet?", "Songs/are you bored yet.mp3", "wallows", 2)};
+Song[] songChoice = {new Song("clarity", "Songs/clarity.mp3", "zedd", 3), new Song("are you bored yet?", "Songs/are you bored yet.mp3", "wallows", 1), new Song ("beauty and a beat", "Songs/beauty and a beat.mp3", "justin bieber/nicki minah", 2)};
 int currentSong = 0;
 
 SoundFile sample;
@@ -12,7 +12,7 @@ FFT fft;
 float[] spectrum = new float[256]; // needs to be power of 2
 
 float threshold = 2; // minimum energy to count as a beat
-int cooldown = 300; // how long to wait between beats
+int cooldown; // how long to wait between beats
 int lastBeat = 0;
 
 int fall;
@@ -30,16 +30,30 @@ void setup() {
   
   bg = loadImage("stage.png");
   
-  arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()), 0);
+  if (currentSong == 0) {
+    cooldown = 500;
+    fall = 2730;
+  } else if (currentSong == 1) {
+    cooldown = 1000;
+    fall = 11090;
+  } else if (currentSong == 3) {
+    cooldown = 500;
+    fall = 0;
+  }
+  
+  arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()));
   arrow.setup();
   
-  fall = int(700/arrow.getRate().mag());
-  
   sample = new SoundFile(this, songChoice[currentSong].getRoute());
-  sample.loop();
+  
+  int now = millis();
+  if (cooldown <= now){
+    sample.play();
+  }
   
   fft = new FFT(this, 256);
   fft.input(sample);
+ 
 }
 
 void draw() {
@@ -64,10 +78,35 @@ void draw() {
     
    if (queued && currentBeat >= nextBeat - fall){
      int randomArrow = int(random(4));
-      arrow.addArrow(randomArrow);
-      queued = false;
+     arrow.addArrow(randomArrow);
+     queued = false;
    }
     
   arrow.update();
-  arrow.setup();
+}
+
+void keyPressed() {
+  if (key == CODED && arrow.getList().size() > 0) {
+    if (keyCode == LEFT) {
+      if (arrow.getList().get(0).getMode() == 0 && (arrow.getList().get(0).getPos().y > 800 && arrow.getList().get(0).getPos().y < 900)) {
+        arrow.deleteArrow();
+        arrow.score++;
+      }
+    } else if (keyCode == RIGHT) {
+      if (arrow.getList().get(0).getMode() == 2 && (arrow.getList().get(0).getPos().y > 800 && arrow.getList().get(0).getPos().y < 900)) {
+        arrow.deleteArrow();
+        arrow.score++;
+      }
+    } else if (keyCode == UP) {
+      if (arrow.getList().get(0).getMode() == 3 && (arrow.getList().get(0).getPos().y > 800 && arrow.getList().get(0).getPos().y < 900)) {
+        arrow.deleteArrow();
+        arrow.score++;
+      }
+    } else if (keyCode == DOWN) {
+      if (arrow.getList().get(0).getMode() == 1 && (arrow.getList().get(0).getPos().y > 800 && arrow.getList().get(0).getPos().y < 900)) {
+        arrow.deleteArrow();
+        arrow.score++;
+      }
+    }
+  }
 }
