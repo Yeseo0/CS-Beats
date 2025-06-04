@@ -27,9 +27,9 @@
      songPreviews[2] = ayby;
      
      backgrounds = new String[3];
-     backgrounds[0] = "clarityBackground.png";
-     backgrounds[1] = "baabBackground.png";
-     backgrounds[2] = "aybyBackground.png";
+     backgrounds[0] = "backgrounds/clarityBackground.png";
+     backgrounds[1] = "backgrounds/baabBackground.png";
+     backgrounds[2] = "backgrounds/aybyBackground.png";
   }
   
   private void playSong(){

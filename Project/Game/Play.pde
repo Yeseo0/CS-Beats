@@ -1,4 +1,5 @@
 import processing.sound.*;
+
 public class Play{
   double progress;
   int stars;
@@ -26,7 +27,7 @@ public class Play{
   void display() {
     size(1920, 1080);
     
-    bg = loadImage("stage.png");
+    bg = loadImage("backgrounds/stage.png");
     
     if (currentSong == 0) {
       cooldown = 500;

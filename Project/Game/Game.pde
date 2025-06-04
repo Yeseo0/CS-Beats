@@ -1,16 +1,19 @@
   import processing.sound.*;
+  
   PImage bg;
   String currentScreen = "HomePage";
   HomePage x;
   MainMenu y;
   Play z;
   
-  SoundFile clarity = new SoundFile(this, "clarity_preview.mp3");
-  SoundFile baab = new SoundFile(this, "baab_preview.MP3");
-  SoundFile ayby = new SoundFile(this, "ayby_preview.MP3");
+  // main menu
+  SoundFile clarity = new SoundFile(this, "previews/clarity_preview.mp3");
+  SoundFile baab = new SoundFile(this, "previews/baab_preview.MP3");
+  SoundFile ayby = new SoundFile(this, "previews/ayby_preview.MP3");
   
+  // play
   FFT fft1 = new FFT(this, 256);
-  Song[] songChoice = {new Song("clarity", "Songs/clarity.mp3", "zedd", 3), new Song("are you bored yet?", "Songs/are you bored yet.mp3", "wallows", 1), new Song ("beauty and a beat", "Songs/beauty and a beat.mp3", "justin bieber/nicki minah", 2)};
+  Song[] songChoice = {new Song("clarity", "songs/clarity.mp3", "zedd", 3), new Song("are you bored yet?", "songs/are you bored yet.mp3", "wallows", 1), new Song ("beauty and a beat", "songs/beauty and a beat.mp3", "justin bieber/nicki minaj", 2)};
   int currentSong = 0;
   SoundFile sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
   

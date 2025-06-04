@@ -1,6 +1,6 @@
 public class HomePage{  
   HomePage(){
-    bg = loadImage("homepage.png");
+    bg = loadImage("backgrounds/homepage.png");
   }
   
   void display(){
