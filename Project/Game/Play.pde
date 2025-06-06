@@ -1,6 +1,9 @@
 import processing.sound.*;
 
 public class Play{
+  double accuracy;
+  double stars;
+  
   SoundFile sample;
   FFT fft;
   
@@ -45,7 +48,7 @@ public class Play{
     // delay in playing song
     int now = millis();
     if (cooldown <= now){
-      sample.play();
+      sample.playFor(sample.duration());
     }
     
     fft = fft1;
@@ -59,8 +62,24 @@ public class Play{
     background(bg);
     arrow.drawBar();
     text("score: " + arrow.getScore(), 40, 120);
-    text("accuracy: " + (double) (arrow.getScore() / arrow.getTotalArrows()), 60, 140); 
+    accuracy = (double) (arrow.getScore() / arrow.getTotalArrows());
+    text("accuracy: " + accuracy, 60, 140); 
     
+    int currentTime = millis();
+    if (currentTime >= sample.duration()){
+      if (accuracy < 0.25){
+        stars++;
+      } else if (accuracy < 0.5){
+        stars+= 2; 
+      } else if (accuracy < 0.65){
+        stars += 3;
+      } else if (accuracy < 0.79){
+        stars += 4;
+      } else {
+        stars += 5;
+      }
+    }
+
     fft.analyze(spectrum);
   
     float beat = 0;
