@@ -28,7 +28,7 @@
   int currentSong = 0;
   
   void setup(){
-     size(1920,1080);
+     size(1778,1000);
      currentScreen = "HomePage";
      
      // LOADING FILES 
