@@ -50,9 +50,11 @@
   void keyPressed(int key){
     if (key == LEFT) { 
         backgroundIndex = (backgroundIndex - 1 + backgrounds.length) % backgrounds.length; // moves left
+        currentSong = (currentSong-1) % songChoice.length;
         changeBackground();
     } else if (key == RIGHT) {
         backgroundIndex = (backgroundIndex + 1) % backgrounds.length; // moves right
+        currentSong = (currentSong+1) % songChoice.length;
         changeBackground();
     } else if (key == 'u') {
         volume = Math.min(volume + 0.1f, 1.0f); // increase volume
@@ -64,6 +66,7 @@
   void mousePressed(){
     if (mouseX >= 800 && mouseX <= 1000 && mouseY >= 900 && mouseY <= 950){
       z = new Play();
+      bg = play;
       currentScreen = "Play";
     }
     if (mouseX >= 900 && mouseX <= 950 && mouseY >= 50 && mouseY <= 100){

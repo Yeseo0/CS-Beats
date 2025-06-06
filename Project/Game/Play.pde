@@ -1,8 +1,6 @@
 import processing.sound.*;
 
 public class Play{
-  double progress;
-  
   SoundFile sample;
   FFT fft;
   
@@ -96,29 +94,29 @@ public class Play{
     // what does this do??? exit the game or?
   }
   
-  void keyPressed() {
-    if (key == CODED && arrow.getList().size() > 0) {
-      if (keyCode == LEFT) {
-        if (arrow.getList().get(0).getMode() == 0 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
-          arrow.deleteArrow();
-          arrow.incScore();
-        }
-      } else if (keyCode == RIGHT) {
-        if (arrow.getList().get(0).getMode() == 2 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
-          arrow.deleteArrow();
-          arrow.incScore();
-        }
-      } else if (keyCode == UP) {
-        if (arrow.getList().get(0).getMode() == 3 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
-          arrow.deleteArrow();
-          arrow.incScore();
-        }
-      } else if (keyCode == DOWN) {
-        if (arrow.getList().get(0).getMode() == 1 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
-          arrow.deleteArrow();
-          arrow.incScore();
-        }
-      }
-    }
-  }
+  //void keyPressed() {
+  //  if (key == CODED && arrow.getList().size() > 0) {
+  //    if (keyCode == LEFT) {
+  //      if (arrow.getList().get(0).getMode() == 0 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
+  //        arrow.deleteArrow();
+  //        arrow.incScore();
+  //      }
+  //    } else if (keyCode == RIGHT) {
+  //      if (arrow.getList().get(0).getMode() == 2 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
+  //        arrow.deleteArrow();
+  //        arrow.incScore();
+  //      }
+  //    } else if (keyCode == UP) {
+  //      if (arrow.getList().get(0).getMode() == 3 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
+  //        arrow.deleteArrow();
+  //        arrow.incScore();
+  //      }
+  //    } else if (keyCode == DOWN) {
+  //      if (arrow.getList().get(0).getMode() == 1 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
+  //        arrow.deleteArrow();
+  //        arrow.incScore();
+  //      }
+  //    }
+  //  }
+  //}
 }
