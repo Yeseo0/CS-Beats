@@ -7,21 +7,16 @@
   private float volume = 0.5f; // default volume
   private int backgroundIndex = 0; // current previewing song
   private SoundFile[] songPreviews; // array of song preview files
-  private String[] backgrounds; // array of song backgrounds
+  private PImage[] backgrounds = new PImage[3]; // array of song backgrounds
   
-  MainMenu(){
-     if (backgroundIndex == 0){
-       bg = main1;
-     } else if (backgroundIndex == 1){
-       bg = main2;
-     } else {
-       bg = main3;
-     }
-     bg = loadImage(backgrounds[backgroundIndex]);
-        
-     songList.add("Clarity");
-     songList.add("Beauty and a Beat");
-     songList.add("Are You Bored Yet?");
+  public MainMenu(PImage[] background, SoundFile[] previews){
+    this.backgrounds = background;
+    this.songPreviews = previews;
+    bg = backgrounds[backgroundIndex];
+
+    songList.add("Clarity");
+    songList.add("Beauty and a Beat");
+    songList.add("Are You Bored Yet?");
     
     // number of stars to be earned upon completion
      difficultyList.add((double)1.0); // clarity --> easy
@@ -45,6 +40,7 @@
   
   void changeBackground(){
     backgroundIndex = (backgroundIndex + 1) % songPreviews.length;
+    bg = backgrounds[backgroundIndex];
     playSong();
   }
   
@@ -63,16 +59,18 @@
   }
   
   void display(){
-    size(1800,1000);
     image(bg, 0, 0);
   }
     
   void mousePressed(){
     if (mouseX >= 800 && mouseX <= 1000 && mouseY >= 900 && mouseY <= 950){
       z = new Play();
+      currentScreen = "Play";
     }
     if (mouseX >= 900 && mouseX <= 950 && mouseY >= 50 && mouseY <= 100){
       x = new HomePage();
+      bg = home;
+      currentScreen = "HomePage";
     }
   }
  }

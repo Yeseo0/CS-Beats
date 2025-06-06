@@ -1,33 +1,43 @@
+  // imports sound library
   import processing.sound.*;
   
-  public PImage bg;
-  public PImage yellow, red, blue, green, arrowBar;
-  public PImage home, main1, main2, main3, play;
+  // images needed (backgrounds and arrows)
+  PImage bg;
+  PImage yellow, red, blue, green, arrowBar;
+  PImage home, main1, main2, main3, play;
+  
+  // more global variables for backgrounds
   String currentScreen = "HomePage";
+  PImage[] menuBackgrounds;
+  
+  // soundfile variables
+  SoundFile[] previews;
+  SoundFile clarity;
+  SoundFile baab;
+  SoundFile ayby;
+  SoundFile sample1;
+  
+  // screens
   HomePage x;
   MainMenu y;
   Play z;
   
-  // main menu
-  SoundFile clarity;
-  SoundFile baab;
-  SoundFile ayby;
-  
-  // play
+  // play (fft for beat detection)
   FFT fft1 = new FFT(this, 256);
   Song[] songChoice = {new Song("clarity", "songs/clarity.mp3", "zedd", 3), new Song("are you bored yet?", "songs/are you bored yet.mp3", "wallows", 1), new Song ("beauty and a beat", "songs/beauty and a beat.mp3", "justin bieber/nicki minaj", 2)};
   int currentSong = 0;
-  SoundFile sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
   
   void setup(){
-     size(1900,1080);
+     size(1920,1080);
      currentScreen = "HomePage";
-     x = new HomePage();
+     
+     // LOADING FILES 
      
      // song files
-     clarity = new SoundFile(this, "previews/clarity_preview.mp3");
-     baab = new SoundFile(this, "previews/baab_preview.mp3");
-     ayby = new SoundFile(this, "previews/ayby_preview.mp3");
+     clarity = new SoundFile(this, "previews/clarity_preview.MP3");
+     baab = new SoundFile(this, "previews/baab_preview.MP3");
+     ayby = new SoundFile(this, "previews/ayby_preview.MP3");
+     sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
     
     // arrows
     yellow = loadImage("arrows/yellowArrow.png");
@@ -42,8 +52,15 @@
     main1 = loadImage("backgrounds/clarityBackground.png");
     main2 = loadImage("backgrounds/baabBackground.png");
     main3 = loadImage("backgrounds/aybyBackground.png");
+    
+    menuBackgrounds = new PImage[]{main1, main2, main3};
+    previews = new SoundFile[]{clarity, baab, ayby};
+    
+    x = new HomePage();
+    bg = home;
   }
   
+// displays appropriate screen depending on the currentScreen variable 
   void draw(){
     if (currentScreen.equals("HomePage")){
       x.display();

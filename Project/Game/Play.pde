@@ -24,11 +24,13 @@ public class Play{
   
   PImage bg;
   
-  void display() {
-    size(1920, 1080);
-    
+  public Play(){
     bg = play;
+  }
+  
+  void display() {
     
+    // cooldown and fall rate depends on difficulty and song itself 
     if (currentSong == 0) {
       cooldown = 500;
       fall = 2730;
@@ -44,6 +46,7 @@ public class Play{
     
     sample = sample1;
     
+    // delay in playing song
     int now = millis();
     if (cooldown <= now){
       sample.play();
@@ -63,12 +66,13 @@ public class Play{
     fft.analyze(spectrum);
   
     float beat = 0;
-    for (int i = 0; i < 256; i++) { // calculates total energy so knows when spikes
+    for (int i = 0; i < 256; i++) { // calculates total energy so knows when spikes/energy occurs
       beat += spectrum[i];
     }
   
     int currentBeat = millis();
     
+    // when the energy exceeds the threshold and occurs after the cooldown ends, queue an arrow
     if ((beat > threshold) && (millis() - lastBeat > cooldown)) {
       interval = currentBeat - lastBeat;
       lastBeat = currentBeat;
@@ -76,12 +80,14 @@ public class Play{
       queued = true;
     }
       
+     // generate a random arrow and unqueue arrow
      if (queued && currentBeat >= nextBeat - fall){
        int randomArrow = int(random(4));
        arrow.addArrow(randomArrow);
        queued = false;
      }
-      
+    
+    // updates 
     arrow.update();
   }
   
