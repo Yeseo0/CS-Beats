@@ -2,8 +2,6 @@ import processing.sound.*;
 
 public class Play{
   double progress;
-  int stars;
-  double accuracy;
   
   SoundFile sample;
   FFT fft;
@@ -62,6 +60,8 @@ public class Play{
   void generateArrow() {
     background(bg);
     arrow.drawBar();
+    text("score: " + arrow.getScore(), 40, 120);
+    text("accuracy: " + (double) (arrow.getScore() / arrow.getTotalArrows()), 60, 140); 
     
     fft.analyze(spectrum);
   
@@ -84,6 +84,7 @@ public class Play{
      if (queued && currentBeat >= nextBeat - fall){
        int randomArrow = int(random(4));
        arrow.addArrow(randomArrow);
+       arrow.incTotalArrows();
        queued = false;
      }
     
@@ -92,6 +93,7 @@ public class Play{
   }
   
   void mousePressed(){
+    // what does this do??? exit the game or?
   }
   
   void keyPressed() {
@@ -99,22 +101,22 @@ public class Play{
       if (keyCode == LEFT) {
         if (arrow.getList().get(0).getMode() == 0 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
           arrow.deleteArrow();
-          arrow.score++;
+          arrow.incScore();
         }
       } else if (keyCode == RIGHT) {
         if (arrow.getList().get(0).getMode() == 2 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
           arrow.deleteArrow();
-          arrow.score++;
+          arrow.incScore();
         }
       } else if (keyCode == UP) {
         if (arrow.getList().get(0).getMode() == 3 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
           arrow.deleteArrow();
-          arrow.score++;
+          arrow.incScore();
         }
       } else if (keyCode == DOWN) {
         if (arrow.getList().get(0).getMode() == 1 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
           arrow.deleteArrow();
-          arrow.score++;
+          arrow.incScore();
         }
       }
     }

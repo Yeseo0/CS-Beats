@@ -8,6 +8,7 @@ public class Arrows {
   private ArrayList<Integer> pastNames = new ArrayList<>();
   private int score = 0;
   private int counter = 0;
+  private int totalArrows = 0;
   
   
   public Arrows(int fallRate) {
@@ -114,6 +115,18 @@ public class Arrows {
   
   public ArrayList<Arrow> getList() {
     return arrows;
+  }
+  
+  public int getTotalArrows(){
+    return totalArrows;
+  }
+  
+  public void incScore(){
+    score++;
+  }
+  
+  public void incTotalArrows(){
+    totalArrows++;
   }
   
 }
