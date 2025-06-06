@@ -31,6 +31,7 @@
   
   void display(){
     image(bg, 0, 0);
+    text("stars: " + stars, 40, 120);
   }
   
   private void playSong(){
