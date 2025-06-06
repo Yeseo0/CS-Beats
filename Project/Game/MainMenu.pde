@@ -27,7 +27,10 @@
      songPreviews[0] = clarity;
      songPreviews[1] = baab;
      songPreviews[2] = ayby;
-     
+  }
+  
+  void display(){
+    image(bg, 0, 0);
   }
   
   private void playSong(){
@@ -56,10 +59,6 @@
     } else if (key == 'd') {
         volume = Math.max(volume - 0.1f, 0.0f); // decrease volume
     }
-  }
-  
-  void display(){
-    image(bg, 0, 0);
   }
     
   void mousePressed(){
