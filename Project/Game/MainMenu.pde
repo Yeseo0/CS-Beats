@@ -1,4 +1,4 @@
- import processing.sound.*;
+import processing.sound.*;
  import java.util.ArrayList;
  
  public class MainMenu{  
@@ -7,14 +7,16 @@
   private float volume = 0.5f; // default volume
   private int backgroundIndex = 0; // current previewing song
   private SoundFile[] songPreviews; // array of song preview files
-  private String[] backgrounds; // array of song backgrounds
+  private PImage[] backgrounds = new PImage[3]; // array of song backgrounds
   
-  MainMenu(){
-     bg = loadImage(backgrounds[backgroundIndex]);
-        
-     songList.add("Clarity");
-     songList.add("Beauty and a Beat");
-     songList.add("Are You Bored Yet?");
+  public MainMenu(PImage[] background, SoundFile[] previews){
+    this.backgrounds = background;
+    this.songPreviews = previews;
+    bg = backgrounds[backgroundIndex];
+
+    songList.add("Clarity");
+    songList.add("Beauty and a Beat");
+    songList.add("Are You Bored Yet?");
     
     // number of stars to be earned upon completion
      difficultyList.add((double)1.0); // clarity --> easy
@@ -25,11 +27,10 @@
      songPreviews[0] = clarity;
      songPreviews[1] = baab;
      songPreviews[2] = ayby;
-     
-     backgrounds = new String[3];
-     backgrounds[0] = "backgrounds/clarityBackground.png";
-     backgrounds[1] = "backgrounds/baabBackground.png";
-     backgrounds[2] = "backgrounds/aybyBackground.png";
+  }
+  
+  void display(){
+    image(bg, 0, 0);
   }
   
   private void playSong(){
@@ -42,15 +43,18 @@
   
   void changeBackground(){
     backgroundIndex = (backgroundIndex + 1) % songPreviews.length;
+    bg = backgrounds[backgroundIndex];
     playSong();
   }
   
   void keyPressed(int key){
     if (key == LEFT) { 
         backgroundIndex = (backgroundIndex - 1 + backgrounds.length) % backgrounds.length; // moves left
+        currentSong = (currentSong-1) % songChoice.length;
         changeBackground();
     } else if (key == RIGHT) {
         backgroundIndex = (backgroundIndex + 1) % backgrounds.length; // moves right
+        currentSong = (currentSong+1) % songChoice.length;
         changeBackground();
     } else if (key == 'u') {
         volume = Math.min(volume + 0.1f, 1.0f); // increase volume
@@ -58,18 +62,17 @@
         volume = Math.max(volume - 0.1f, 0.0f); // decrease volume
     }
   }
-  
-  void display(){
-    size(1800,1000);
-    image(bg, 0, 0);
-  }
     
   void mousePressed(){
     if (mouseX >= 800 && mouseX <= 1000 && mouseY >= 900 && mouseY <= 950){
       z = new Play();
+      bg = play;
+      currentScreen = "Play";
     }
     if (mouseX >= 900 && mouseX <= 950 && mouseY >= 50 && mouseY <= 100){
       x = new HomePage();
+      bg = home;
+      currentScreen = "HomePage";
     }
   }
  }
