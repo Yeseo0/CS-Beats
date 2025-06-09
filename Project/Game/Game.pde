@@ -107,15 +107,14 @@
         y.volume = Math.min(y.volume + 0.1f, 1.0f); // increase volume
     }
     if (key == 'd') {
-      println("run");
         y.volume = Math.max(y.volume - 0.1f, 0.0f); // decrease volume
     }
     if (currentScreen.equals("Play") && key == CODED) {
       // need to edit so that all keypresseds are in the game sketch
-      if (keyCode == LEFT) z.Arrows.left();
-      else if (keyCode == RIGHT) z.Arrows.right();
-      else if (keyCode == UP) z.Arrows.up();
-      else if (keyCode == DOWN) z.Arrows.down();
+      if (keyCode == LEFT) z.getArrow().left();
+      else if (keyCode == RIGHT) z.getArrow().right();
+      else if (keyCode == UP) z.getArrow().up();
+      else if (keyCode == DOWN) z.getArrow().down();
     }
   }
   
