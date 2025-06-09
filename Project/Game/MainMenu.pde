@@ -4,8 +4,9 @@
  public class MainMenu{  
   private ArrayList<String> songList = new ArrayList<>();
   private ArrayList<Double> difficultyList = new ArrayList<>();
-  private float volume = 0.5f; // default volume
+  private float volume = 0.5; // default volume
   private int backgroundIndex = 0; // current previewing song
+  private int lastBackgroundIndex = 0;
   private SoundFile[] songPreviews; // array of song preview files
   private PImage[] backgrounds = menuBackgrounds; // array of song backgrounds
   
@@ -35,11 +36,39 @@
     image(bg, 0, 0);
   }
   
+  public int getBackgroundIndex(){
+    return backgroundIndex;
+  }
+  
+  public int getLastBackgroundIndex(){
+    return lastBackgroundIndex;
+  }
+  
+  public void setBackgroundIndex(int index){
+    backgroundIndex = index;
+  }
+  
+  public void setLastBackgroundIndex(int index){
+   lastBackgroundIndex = index;
+  }
+  
+  public void setVolume(float v){
+    volume = v;
+  }
+
+  public float getVolume(){
+     return volume;
+  }
+  
+  public PImage[] getBackgroundArray(){
+    return backgrounds;
+  }
+  
   private void playSong(){
     if (songPreviews[backgroundIndex] != null) {
           songPreviews[backgroundIndex].stop(); // stop previous preview if playing
-          songPreviews[backgroundIndex].amp(0.3f); // set low volume
-          songPreviews[backgroundIndex].play();
+          songPreviews[backgroundIndex].amp(volume); // set low volume
+          songPreviews[backgroundIndex].loop();
       }
   }
   

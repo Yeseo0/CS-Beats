@@ -1,6 +1,6 @@
 import processing.sound.*;
 
-public class Song extends Play{
+public class Song{
   String name;
   String route; // file route
   String singer;

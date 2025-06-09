@@ -16,7 +16,6 @@
   SoundFile baab;
   SoundFile ayby;
   SoundFile sample1;
-  SoundFile currentPreview;
   
   // screens
   HomePage x;
@@ -78,7 +77,7 @@
       currentScreen = "MainMenu";
      }
      if (currentScreen.equals("MainMenu") && mouseX >= 470 && mouseX <= 1000 && mouseY >= 900 && mouseY <= 950){
-      z = new Play();
+      z = new Play(songChoice, currentSong);
       bg = play;
       currentScreen = "Play";
     }
@@ -91,26 +90,34 @@
 
   
    void keyPressed(){
+     
+     // use setters as instance variables are private for class!!!
+     
     if (keyCode == LEFT) { 
         if (y != null && currentScreen.equals("MainMenu")){
-          y.backgroundIndex = (y.backgroundIndex - 1 + y.backgrounds.length) % y.backgrounds.length; // moves left
-          currentSong = (currentSong - 1 + songChoice.length) % songChoice.length;
-          y.changeBackground();
+          y.setBackgroundIndex((y.getBackgroundIndex() - 1 + y.getBackgroundArray().length) % y.getBackgroundArray().length); // moves left
+          currentSong = (currentSong - 1 + songChoice.length) % songChoice.length; // moving left doesn't work
+          y.changeBackground(); 
         }
     }
     if (keyCode == RIGHT) {
-      if (y != null && currentScreen.equals("MainMenu")){
-        y.backgroundIndex = (y.backgroundIndex + 1) % y.backgrounds.length; // moves right
+      if (y != null && currentScreen.equals("MainMenu")){ // works but the audio doesn't stop
+        y.setBackgroundIndex((y.getBackgroundIndex() + 1) % y.getBackgroundArray().length); // moves right
         currentSong = (currentSong + 1) % songChoice.length;
         y.changeBackground();
       }
     }
+    
+    // my audio comphrension isn't that good but i think it kinda works? - eve
     if (key == 'u') {
-        y.volume = Math.min(y.volume + 0.1f, 1.0f); // increase volume
+        //y.setVolume(Math.min(y.getVolume() + 0.1f, 1.0f)); // increase volume
+        Sound.volume(Math.min(y.getVolume() + 0.1, 1.0));
     }
     if (key == 'd') {
       println("run");
-        y.volume = Math.max(y.volume - 0.1f, 0.0f); // decrease volume
+        //y.setVolume(Math.max(y.getVolume() - 0.1f, 0.0f)); // decrease volume
+        Sound.volume(Math.max(y.getVolume() - 0.1, 0.0));
+        
     }
     if (currentScreen.equals("Play") && key == CODED) {
       // need to edit so that all keypresseds are in the game sketch

@@ -1,6 +1,6 @@
 import processing.sound.*;
 
-public class Play{
+public class Play extends Game{
   double progress;
   int stars;
   double accuracy;
@@ -21,14 +21,12 @@ public class Play{
   boolean queued = false;
   
   Arrows arrow;
-  
   PImage bg;
   
-  public Play(){
+  public Play(Song[] songChoice, int currentSong) {
+    this.songChoice = songChoice;
+    this.currentSong = currentSong;
     bg = play;
-  }
-  
-  void display() {
     
     // cooldown and fall rate depends on difficulty and song itself 
     if (currentSong == 0) {
@@ -45,7 +43,10 @@ public class Play{
     arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()));
     
     sample = sample1;
-    
+  }
+  
+  void display() {
+
     // delay in playing song
     int now = millis();
     if (cooldown <= now){
