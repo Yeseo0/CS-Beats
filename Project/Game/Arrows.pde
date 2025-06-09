@@ -2,13 +2,17 @@ import java.util.ArrayList;
 
 public class Arrows {
   private PVector rate;
-  public ArrayList<Arrow> arrows = new ArrayList<>();
+  private ArrayList<Arrow> arrows = new ArrayList<>();
   private ArrayList<Arrow> pastA = new ArrayList<>();
   private ArrayList<Integer> arrowNames = new ArrayList<>();
   private ArrayList<Integer> pastNames = new ArrayList<>();
   private int score = 0;
   private int counter = 0;
-  private int totalArrows = 0;
+  
+  
+  public Arrows(int fallRate) {
+    rate = new PVector (0, fallRate);
+  }
   
   public void left(){
     if (arrows.size() > 0 && arrows.get(0).getMode() == 0 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
@@ -37,10 +41,7 @@ public class Arrows {
           score++;
     }
   }
-  
-  public Arrows(int fallRate) {
-    rate = new PVector (0, fallRate);
-  }
+
   
   void drawBar() {
     image(arrowBar, 350, 850);
@@ -116,18 +117,6 @@ public class Arrows {
   
   public ArrayList<Arrow> getList() {
     return arrows;
-  }
-  
-  public int getTotalArrows(){
-    return totalArrows;
-  }
-  
-  public void incScore(){
-    score++;
-  }
-  
-  public void incTotalArrows(){
-    totalArrows++;
   }
   
 }

@@ -16,6 +16,7 @@
   SoundFile baab;
   SoundFile ayby;
   SoundFile sample1;
+  SoundFile currentPreview;
   
   // screens
   HomePage x;
@@ -40,10 +41,10 @@
      sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
     
     // arrows
-    yellow = loadImage("arrows/yellowArrow.gif");
-    red = loadImage("arrows/redArrow.gif");
-    blue = loadImage("arrows/blueArrow.gif");
-    green = loadImage("arrows/greenArrow.gif");
+    yellow = loadImage("arrows/yellowArrow.png");
+    red = loadImage("arrows/redArrow.png");
+    blue = loadImage("arrows/blueArrow.png");
+    green = loadImage("arrows/greenArrow.png");
     arrowBar = loadImage("arrows/Arrows.png");
     
     // backgrounds
@@ -71,7 +72,7 @@
     }
   }
   
-  void mousePressed(){
+   void mousePressed(){
     if (currentScreen.equals("HomePage") && mouseX >= 510 && mouseX <= 1245 && mouseY >= 755 && mouseY <= 965){
       y = new MainMenu(menuBackgrounds, previews);
       currentScreen = "MainMenu";
@@ -87,12 +88,13 @@
       currentScreen = "HomePage";
     }
   }
+
   
-  void keyPressed(){
+   void keyPressed(){
     if (keyCode == LEFT) { 
         if (y != null && currentScreen.equals("MainMenu")){
           y.backgroundIndex = (y.backgroundIndex - 1 + y.backgrounds.length) % y.backgrounds.length; // moves left
-          currentSong = (currentSong - 1) % songChoice.length;
+          currentSong = (currentSong - 1 + songChoice.length) % songChoice.length;
           y.changeBackground();
         }
     }
@@ -107,14 +109,16 @@
         y.volume = Math.min(y.volume + 0.1f, 1.0f); // increase volume
     }
     if (key == 'd') {
+      println("run");
         y.volume = Math.max(y.volume - 0.1f, 0.0f); // decrease volume
     }
     if (currentScreen.equals("Play") && key == CODED) {
       // need to edit so that all keypresseds are in the game sketch
-      if (keyCode == LEFT) z.getArrow().left();
-      else if (keyCode == RIGHT) z.getArrow().right();
-      else if (keyCode == UP) z.getArrow().up();
-      else if (keyCode == DOWN) z.getArrow().down();
+      if (keyCode == LEFT) z.getArrows().left();
+      else if (keyCode == RIGHT) z.getArrows().right();
+      else if (keyCode == UP) z.getArrows().up();
+      else if (keyCode == DOWN) z.getArrows().down();
     }
   }
+
   

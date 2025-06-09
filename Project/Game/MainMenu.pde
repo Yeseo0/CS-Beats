@@ -1,4 +1,4 @@
-import processing.sound.*;
+ import processing.sound.*;
  import java.util.ArrayList;
  
  public class MainMenu{  
@@ -47,4 +47,7 @@ import processing.sound.*;
     backgroundIndex = (backgroundIndex + 1) % songPreviews.length;
     bg = backgrounds[backgroundIndex];
     playSong();
+
   }
+
+ }
