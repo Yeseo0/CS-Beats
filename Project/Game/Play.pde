@@ -28,6 +28,8 @@ public class Play{
   }
   
   void display() {
+    size(1778,1000);
+    bg = loadImage("backgrounds/stage.png");
     
     // cooldown and fall rate depends on difficulty and song itself 
     if (currentSong == 0) {
@@ -79,7 +81,7 @@ public class Play{
         stars += 5;
       }
     }
-    
+
     fft.analyze(spectrum);
   
     float beat = 0;
@@ -108,34 +110,31 @@ public class Play{
     // updates 
     arrow.update();
   }
-  
-  void mousePressed(){
-    // what does this do??? exit the game or?
+
+  /*void keyPressed() {
+    if (key == CODED && Arrows.size() > 0) {
+      if (keyCode == LEFT) {
+        if (arrows.get(0).getMode() == 0 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+          deleteArrow();
+          score++;
+        }
+      } else if (keyCode == RIGHT) {
+        if (arrows.get(0).getMode() == 2 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+          deleteArrow();
+          score++;
+        }
+      } else if (keyCode == UP) {
+        if (arrows.get(0).getMode() == 3 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+          deleteArrow();
+          score++;
+        }
+      } else if (keyCode == DOWN) {
+        if (arrows.get(0).getMode() == 1 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+          deleteArrow();
+          score++;
+        }
+      }
+    }
   }
-  
-  //void keyPressed() {
-  //  if (key == CODED && arrow.getList().size() > 0) {
-  //    if (keyCode == LEFT) {
-  //      if (arrow.getList().get(0).getMode() == 0 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
-  //        arrow.deleteArrow();
-  //        arrow.incScore();
-  //      }
-  //    } else if (keyCode == RIGHT) {
-  //      if (arrow.getList().get(0).getMode() == 2 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
-  //        arrow.deleteArrow();
-  //        arrow.incScore();
-  //      }
-  //    } else if (keyCode == UP) {
-  //      if (arrow.getList().get(0).getMode() == 3 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
-  //        arrow.deleteArrow();
-  //        arrow.incScore();
-  //      }
-  //    } else if (keyCode == DOWN) {
-  //      if (arrow.getList().get(0).getMode() == 1 && (arrow.getList().get(0).getPos().y > 830 && arrow.getList().get(0).getPos().y < 900)) {
-  //        arrow.deleteArrow();
-  //        arrow.incScore();
-  //      }
-  //    }
-  //  }
-  //}
+  */
 }
