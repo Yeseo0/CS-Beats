@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Arrows {
   private PVector rate;
-  private ArrayList<Arrow> arrows = new ArrayList<>();
+  public ArrayList<Arrow> arrows = new ArrayList<>();
   private ArrayList<Arrow> pastA = new ArrayList<>();
   private ArrayList<Integer> arrowNames = new ArrayList<>();
   private ArrayList<Integer> pastNames = new ArrayList<>();
@@ -10,6 +10,33 @@ public class Arrows {
   private int counter = 0;
   private int totalArrows = 0;
   
+  public void left(){
+    if (arrows.size() > 0 && arrows.get(0).getMode() == 0 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+          deleteArrow();
+          score++;
+    }
+  }
+  
+  public void right(){
+    if (arrows.size() > 0 && arrows.get(0).getMode() == 2 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+          deleteArrow();
+          score++;
+    }
+  }
+  
+  public void up(){
+    if (arrows.size() > 0 && arrows.get(0).getMode() == 3 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+          deleteArrow();
+          score++;
+    }
+  }
+  
+  public void down(){
+    if (arrows.size() > 0 && arrows.get(0).getMode() == 1 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+          deleteArrow();
+          score++;
+    }
+  }
   
   public Arrows(int fallRate) {
     rate = new PVector (0, fallRate);
@@ -75,32 +102,6 @@ public class Arrows {
         }
         arr.getPos().add(rate);
         drawArrow(arr.getPos(), arr.getMode());
-      }
-    }
-  }
-  
-  void keyPressed() {
-    if (key == CODED && arrows.size() > 0) {
-      if (keyCode == LEFT) {
-        if (arrows.get(0).getMode() == 0 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
-          deleteArrow();
-          score++;
-        }
-      } else if (keyCode == RIGHT) {
-        if (arrows.get(0).getMode() == 2 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
-          deleteArrow();
-          score++;
-        }
-      } else if (keyCode == UP) {
-        if (arrows.get(0).getMode() == 3 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
-          deleteArrow();
-          score++;
-        }
-      } else if (keyCode == DOWN) {
-        if (arrows.get(0).getMode() == 1 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
-          deleteArrow();
-          score++;
-        }
       }
     }
   }

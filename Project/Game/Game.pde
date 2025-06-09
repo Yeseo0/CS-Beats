@@ -28,7 +28,7 @@
   int currentSong = 0;
   
   void setup(){
-     size(1920,1080);
+     size(1778,1000);
      currentScreen = "HomePage";
      
      // LOADING FILES 
@@ -40,10 +40,10 @@
      sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
     
     // arrows
-    yellow = loadImage("arrows/yellowArrow.png");
-    red = loadImage("arrows/redArrow.png");
-    blue = loadImage("arrows/blueArrow.png");
-    green = loadImage("arrows/greenArrow.png");
+    yellow = loadImage("arrows/yellowArrow.gif");
+    red = loadImage("arrows/redArrow.gif");
+    blue = loadImage("arrows/blueArrow.gif");
+    green = loadImage("arrows/greenArrow.gif");
     arrowBar = loadImage("arrows/Arrows.png");
     
     // backgrounds
@@ -72,12 +72,50 @@
   }
   
   void mousePressed(){
-    if (currentScreen.equals("HomePage")){
-      x.mousePressed();
-    } else if (currentScreen.equals("MainMenu")){
-      y.mousePressed();
-    } else{
-      z.mousePressed();
+    if (currentScreen.equals("HomePage") && mouseX >= 510 && mouseX <= 1245 && mouseY >= 755 && mouseY <= 965){
+      y = new MainMenu(menuBackgrounds, previews);
+      currentScreen = "MainMenu";
+     }
+     if (currentScreen.equals("MainMenu") && mouseX >= 470 && mouseX <= 1000 && mouseY >= 900 && mouseY <= 950){
+      z = new Play();
+      bg = play;
+      currentScreen = "Play";
+    }
+    if (currentScreen.equals("MainMenu") && mouseX >= 1600 && mouseX <= 1725 && mouseY >= 65 && mouseY <= 185){
+      x = new HomePage();
+      bg = home;
+      currentScreen = "HomePage";
+    }
+  }
+  
+  void keyPressed(){
+    if (keyCode == LEFT) { 
+        if (y != null && currentScreen.equals("MainMenu")){
+          y.backgroundIndex = (y.backgroundIndex - 1 + y.backgrounds.length) % y.backgrounds.length; // moves left
+          currentSong = (currentSong - 1) % songChoice.length;
+          y.changeBackground();
+        }
+    }
+    if (keyCode == RIGHT) {
+      if (y != null && currentScreen.equals("MainMenu")){
+        y.backgroundIndex = (y.backgroundIndex + 1) % y.backgrounds.length; // moves right
+        currentSong = (currentSong + 1) % songChoice.length;
+        y.changeBackground();
+      }
+    }
+    if (key == 'u') {
+        y.volume = Math.min(y.volume + 0.1f, 1.0f); // increase volume
+    }
+    if (key == 'd') {
+      println("run");
+        y.volume = Math.max(y.volume - 0.1f, 0.0f); // decrease volume
+    }
+    if (currentScreen.equals("Play") && key == CODED) {
+      // need to edit so that all keypresseds are in the game sketch
+      if (keyCode == LEFT) z.Arrows.left();
+      else if (keyCode == RIGHT) z.Arrows.right();
+      else if (keyCode == UP) z.Arrows.up();
+      else if (keyCode == DOWN) z.Arrows.down();
     }
   }
   
