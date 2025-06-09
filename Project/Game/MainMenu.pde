@@ -7,12 +7,13 @@ import processing.sound.*;
   private float volume = 0.5f; // default volume
   private int backgroundIndex = 0; // current previewing song
   private SoundFile[] songPreviews; // array of song preview files
-  private PImage[] backgrounds = new PImage[3]; // array of song backgrounds
+  private PImage[] backgrounds = menuBackgrounds; // array of song backgrounds
   
   public MainMenu(PImage[] background, SoundFile[] previews){
     this.backgrounds = background;
     this.songPreviews = previews;
-    bg = backgrounds[backgroundIndex];
+    bg = menuBackgrounds[backgroundIndex];
+    currentScreen = "MainMenu";
 
     songList.add("Clarity");
     songList.add("Beauty and a Beat");
@@ -30,6 +31,7 @@ import processing.sound.*;
   }
   
   void display(){
+    background(0);
     image(bg, 0, 0);
   }
   
@@ -42,37 +44,8 @@ import processing.sound.*;
   }
   
   void changeBackground(){
-    backgroundIndex = (backgroundIndex + 1) % songPreviews.length;
-    bg = backgrounds[backgroundIndex];
+    bg = menuBackgrounds[backgroundIndex];
+    display();
     playSong();
-  }
-  
-  void keyPressed(int key){
-    if (key == LEFT) { 
-        backgroundIndex = (backgroundIndex - 1 + backgrounds.length) % backgrounds.length; // moves left
-        currentSong = (currentSong-1) % songChoice.length;
-        changeBackground();
-    } else if (key == RIGHT) {
-        backgroundIndex = (backgroundIndex + 1) % backgrounds.length; // moves right
-        currentSong = (currentSong+1) % songChoice.length;
-        changeBackground();
-    } else if (key == 'u') {
-        volume = Math.min(volume + 0.1f, 1.0f); // increase volume
-    } else if (key == 'd') {
-        volume = Math.max(volume - 0.1f, 0.0f); // decrease volume
-    }
-  }
-    
-  void mousePressed(){
-    if (mouseX >= 800 && mouseX <= 1000 && mouseY >= 900 && mouseY <= 950){
-      z = new Play();
-      bg = play;
-      currentScreen = "Play";
-    }
-    if (mouseX >= 900 && mouseX <= 950 && mouseY >= 50 && mouseY <= 100){
-      x = new HomePage();
-      bg = home;
-      currentScreen = "HomePage";
-    }
   }
  }

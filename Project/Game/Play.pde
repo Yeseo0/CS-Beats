@@ -25,7 +25,7 @@ public class Play{
   PImage bg;
   
   void display() {
-    size(1920, 1080);
+    size(1778,1000);
     
     bg = loadImage("backgrounds/stage.png");
     
@@ -83,9 +83,6 @@ public class Play{
      }
       
     arrow.update();
-  }
-  
-  void mousePressed(){
   }
   
   /*void keyPressed() {

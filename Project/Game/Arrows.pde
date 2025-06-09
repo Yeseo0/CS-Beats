@@ -3,21 +3,43 @@ import java.util.ArrayList;
 public class Arrows {
   private PImage yellow, red, blue, green, arrowBar;
   private PVector rate;
-  private ArrayList<Arrow> arrows = new ArrayList<>();
+  public ArrayList<Arrow> arrows = new ArrayList<>();
   private ArrayList<Arrow> pastA = new ArrayList<>();
   private ArrayList<Integer> arrowNames = new ArrayList<>();
   private ArrayList<Integer> pastNames = new ArrayList<>();
   private int score = 0;
   private int counter = 0;
   
+  public void left(){
+    if (arrows.size() > 0 && arrows.get(0).getMode() == 0 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+          deleteArrow();
+          score++;
+    }
+  }
+  
+  public void right(){
+    if (arrows.size() > 0 && arrows.get(0).getMode() == 2 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+          deleteArrow();
+          score++;
+    }
+  }
+  
+  public void up(){
+    if (arrows.size() > 0 && arrows.get(0).getMode() == 3 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+          deleteArrow();
+          score++;
+    }
+  }
+  
+  public void down(){
+    if (arrows.size() > 0 && arrows.get(0).getMode() == 1 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+          deleteArrow();
+          score++;
+    }
+  }
   
   public Arrows(int fallRate) {
     rate = new PVector (0, fallRate);
-    yellow = loadImage("arrows/yellowArrow.png");
-    red = loadImage("arrows/redArrow.png");
-    blue = loadImage("arrows/blueArrow.png");
-    green = loadImage("arrows/greenArrow.png");
-    arrowBar = loadImage("arrows/Arrows.png");
   }
   
   void drawBar() {
