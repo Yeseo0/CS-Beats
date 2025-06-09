@@ -24,4 +24,5 @@ public class Song extends Play{
   public int getDifficulty(){
     return difficulty;
   }
+  
 }
