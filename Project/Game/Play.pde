@@ -1,8 +1,6 @@
 import processing.sound.*;
 
-public class Play extends Game{
-  double progress;
-  int stars;
+public class Play{
   double accuracy;
   
   SoundFile sample;
@@ -21,14 +19,20 @@ public class Play extends Game{
   boolean queued = false;
   
   Arrows arrow;
+  
   PImage bg;
   
-  public Play(Song[] songChoice, int currentSong) {
-    this.songChoice = songChoice;
-    this.currentSong = currentSong;
+  public Play(int currentSong) {
     bg = play;
     
-    // cooldown and fall rate depends on difficulty and song itself 
+    sample = sample1;
+    fft = fft1;
+    
+    fft.input(sample);
+    
+    arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()));
+    
+     // cooldown and fall rate depends on difficulty and song itself 
     if (currentSong == 0) {
       cooldown = 500;
       fall = 2730;
@@ -40,30 +44,47 @@ public class Play extends Game{
       fall = 0;
     }
     
-    arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()));
-    
-    sample = sample1;
   }
   
   void display() {
-
+    background(bg);
+    
     // delay in playing song
     int now = millis();
     if (cooldown <= now){
-      sample.play();
+      sample.playFor(sample.duration());
     }
-    
-    fft = fft1;
-    fft.input(sample);
     
     generateArrow();
    
   }
   
   void generateArrow() {
-    background(bg);
     arrow.drawBar();
     
+    textSize(100);
+    text("score: " + arrow.getScore(), 40, 120);
+    if (arrow.getTotalArrows() != 0){
+      accuracy = (double) (arrow.getScore() / arrow.getTotalArrows());
+      textSize(100);
+      text("accuracy: " + accuracy, 40, 220); 
+    }
+    
+    int currentTime = millis();
+    if (currentTime >= sample.duration()){
+      if (accuracy < 0.25){
+        stars++;
+      } else if (accuracy < 0.5){
+        stars+= 2; 
+      } else if (accuracy < 0.65){
+        stars += 3;
+      } else if (accuracy < 0.79){
+        stars += 4;
+      } else {
+        stars += 5;
+      }
+    }
+
     fft.analyze(spectrum);
   
     float beat = 0;
@@ -85,6 +106,7 @@ public class Play extends Game{
      if (queued && currentBeat >= nextBeat - fall){
        int randomArrow = int(random(4));
        arrow.addArrow(randomArrow);
+       arrow.incTotalArrows();
        queued = false;
      }
     
@@ -95,5 +117,5 @@ public class Play extends Game{
   Arrows getArrows(){
     return arrow;
   }
- 
+
 }

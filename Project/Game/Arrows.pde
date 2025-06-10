@@ -8,7 +8,7 @@ public class Arrows {
   private ArrayList<Integer> pastNames = new ArrayList<>();
   private int score = 0;
   private int counter = 0;
-  
+  private int totalArrows = 0;
   
   public Arrows(int fallRate) {
     rate = new PVector (0, fallRate);
@@ -48,6 +48,7 @@ public class Arrows {
   }
   
   void drawArrow(PVector arrow, int mode) {
+    incTotalArrows();
     if (mode==0){
       image(red,775,arrow.y,162,162);
     }
@@ -117,6 +118,14 @@ public class Arrows {
   
   public ArrayList<Arrow> getList() {
     return arrows;
+  }
+  
+  public int getTotalArrows(){
+    return totalArrows;
+  }
+  
+  public void incTotalArrows(){
+    totalArrows++;
   }
   
 }

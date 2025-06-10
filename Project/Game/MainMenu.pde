@@ -9,12 +9,14 @@
   private int lastBackgroundIndex = 0;
   private SoundFile[] songPreviews; // array of song preview files
   private PImage[] backgrounds = menuBackgrounds; // array of song backgrounds
+  private int stars;
   
-  public MainMenu(PImage[] background, SoundFile[] previews){
+  public MainMenu(PImage[] background, SoundFile[] previews, int stars){
     this.backgrounds = background;
     this.songPreviews = previews;
     bg = menuBackgrounds[backgroundIndex];
     currentScreen = "MainMenu";
+    this.stars = stars;
 
     songList.add("Clarity");
     songList.add("Beauty and a Beat");
@@ -34,6 +36,7 @@
   void display(){
     background(0);
     image(bg, 0, 0);
+    text("stars: " + stars, 40, 40);
   }
   
   public int getBackgroundIndex(){

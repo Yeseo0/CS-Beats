@@ -9,6 +9,7 @@
   // more global variables for backgrounds
   String currentScreen = "HomePage";
   PImage[] menuBackgrounds;
+  int stars = 0;
   
   // soundfile variables
   SoundFile[] previews;
@@ -73,11 +74,11 @@
   
    void mousePressed(){
     if (currentScreen.equals("HomePage") && mouseX >= 510 && mouseX <= 1245 && mouseY >= 755 && mouseY <= 965){
-      y = new MainMenu(menuBackgrounds, previews);
+      y = new MainMenu(menuBackgrounds, previews, stars);
       currentScreen = "MainMenu";
      }
      if (currentScreen.equals("MainMenu") && mouseX >= 470 && mouseX <= 1000 && mouseY >= 900 && mouseY <= 950){
-      z = new Play(songChoice, currentSong);
+      z = new Play(currentSong);
       bg = play;
       currentScreen = "Play";
     }
@@ -97,26 +98,26 @@
         if (y != null && currentScreen.equals("MainMenu")){
           y.setBackgroundIndex((y.getBackgroundIndex() - 1 + y.getBackgroundArray().length) % y.getBackgroundArray().length); // moves left
           currentSong = (currentSong - 1 + songChoice.length) % songChoice.length; // moving left doesn't work
+          sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
           y.changeBackground(); 
         }
     }
     if (keyCode == RIGHT) {
       if (y != null && currentScreen.equals("MainMenu")){ // works but the audio doesn't stop
         y.setBackgroundIndex((y.getBackgroundIndex() + 1) % y.getBackgroundArray().length); // moves right
+        sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
         currentSong = (currentSong + 1) % songChoice.length;
         y.changeBackground();
       }
     }
     
-    // my audio comphrension isn't that good but i think it kinda works? - eve
+    // volume kinda works (global)
     if (key == 'u') {
-        //y.setVolume(Math.min(y.getVolume() + 0.1f, 1.0f)); // increase volume
         Sound.volume(Math.min(y.getVolume() + 0.1, 1.0));
     }
     if (key == 'd') {
       println("run");
-        //y.setVolume(Math.max(y.getVolume() - 0.1f, 0.0f)); // decrease volume
-        Sound.volume(Math.max(y.getVolume() - 0.1, 0.0));
+      Sound.volume(Math.max(y.getVolume() - 0.1, 0.0));
         
     }
     if (currentScreen.equals("Play") && key == CODED) {
