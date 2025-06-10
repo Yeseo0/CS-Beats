@@ -48,6 +48,7 @@ public class Play{
   
   void display() {
     background(bg);
+    arrow.drawBar();
     
     // delay in playing song
     int now = millis();
@@ -60,7 +61,6 @@ public class Play{
   }
   
   void generateArrow() {
-    arrow.drawBar();
     
     textSize(100);
     text("score: " + arrow.getScore(), 40, 120);
@@ -70,8 +70,7 @@ public class Play{
       text("accuracy: " + accuracy, 40, 220); 
     }
     
-    int currentTime = millis();
-    if (currentTime >= sample.duration()){
+    if (!sample.isPlaying()){
       if (accuracy < 0.25){
         stars++;
       } else if (accuracy < 0.5){
@@ -83,7 +82,13 @@ public class Play{
       } else {
         stars += 5;
       }
+      
+      y = new MainMenu(menuBackgrounds, previews, stars);
+      bg = home;
+      currentScreen = "MainMenu";
+      return; 
     }
+  
 
     fft.analyze(spectrum);
   

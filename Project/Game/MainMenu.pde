@@ -36,7 +36,8 @@
   void display(){
     background(0);
     image(bg, 0, 0);
-    text("stars: " + stars, 40, 40);
+    textSize(100);
+    text("stars: " + stars, 1000, 120);
   }
   
   public int getBackgroundIndex(){
