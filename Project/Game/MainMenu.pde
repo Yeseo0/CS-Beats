@@ -35,12 +35,16 @@ import processing.sound.*;
   }
   
   void displayText(){
-    fill(0, 200);
+    resetMatrix();
+    translate(0, 0);
     rect(1050, 70, 450, 100, 50);
+    fill(255);
     textFont(font);
     textSize(100);
-    fill(255);
-    text("stars: " + stars, 1100, 150);    
+    textAlign(1050, 70);
+    text("Stars: " + stars, 1100, 150);    
+    fill(0, 200);
+    resetMatrix();
   }
   
   public int getBackgroundIndex(){
