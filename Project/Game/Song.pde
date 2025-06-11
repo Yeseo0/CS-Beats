@@ -1,10 +1,10 @@
 import processing.sound.*;
 
-public class Song extends Play{
-  String name;
-  String route; // file route
-  String singer;
-  int difficulty;
+public class Song{
+  private String name;
+  private String route; // file route
+  private String singer;
+  private int difficulty;
   
   public Song(String name, String route, String singer, int difficulty){
     this.name = name;
@@ -13,16 +13,15 @@ public class Song extends Play{
     this.difficulty = difficulty;
   }
   
-  public String getName(){
+  String getName(){
     return name;
   }
   
-  public String getRoute(){
+  String getRoute(){
     return route;
   }
   
-  public int getDifficulty(){
+  int getDifficulty(){
     return difficulty;
-  }
-  
+  } 
 }
