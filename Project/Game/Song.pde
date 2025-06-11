@@ -1,6 +1,7 @@
 import processing.sound.*;
 
 public class Song{
+
   String name;
   String route; // file route
   String singer;
@@ -13,16 +14,15 @@ public class Song{
     this.difficulty = difficulty;
   }
   
-  public String getName(){
+  String getName(){
     return name;
   }
   
-  public String getRoute(){
+  String getRoute(){
     return route;
   }
   
-  public int getDifficulty(){
+  int getDifficulty(){
     return difficulty;
-  }
-  
+  } 
 }
