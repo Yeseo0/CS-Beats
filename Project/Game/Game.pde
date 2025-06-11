@@ -105,6 +105,9 @@
       z.sample.pause();
       y = new MainMenu(menuBackgrounds, previews, stars);
       currentScreen = "MainMenu";
+      y.resetBackground();
+      currentSong = 0;
+      sample1 = new SoundFile(this,songChoice[currentSong].getRoute());
     }
   }
 
@@ -116,7 +119,7 @@
     if (keyCode == LEFT) { 
         if (y != null && currentScreen.equals("MainMenu")){
           y.changeBackgroundLeft();
-          currentSong = (currentSong - 1 + songChoice.length) % songChoice.length; // moving left doesn't work
+          currentSong = (currentSong - 1 + songChoice.length) % songChoice.length;
           sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
         }
     }
