@@ -59,6 +59,44 @@
 6/3/25
 	- All: worked on fixing Target Invocation Error
 
-6/4/25 
-	- All: continued to try to fix this error since it prevented us from progressing
+6/3/25-6/4/25
+    - All: worked on fixing Target Invocation Error since it prevented us from progressing
 
+6/5/25
+	- Eve: Fixed Target Invocation Error!!! YAY :)
+			- Next Step: fixing mouse pressed and key pressed for main menu (doesn’t go to play), and having a less specific region that works when clicked for home page
+	- Esther: Fixed arrow class time delay bug but found issues with keyPressed() method (which eliminates pressed arrows) not being in the class containing the draw() method
+
+6/6/25-6/8/25
+	- Amy:
+		- Adjust dimensions of the images
+		- Add details to the HomePage background
+		- Fix mousePressed() to be the right coords and & keyPressed() of each class
+	- Eve:
+		- Fix Play class delay timer
+		- Implement basic score/accuracy mechanism
+		- Implement rough draft of stars 
+        - Test BAAB
+	- Esther:
+		- Add combos to Play class
+
+6/9/25
+	- Amy:
+		- Fix preview song swapping/playing the audio
+		- Fix UML diagram
+	- Eve
+		- Fix volume increase/decrease
+
+6/10/25
+	- Amy
+	- Eve
+		- Fix preview song playing when going back to home page 
+		- Fix left arrow background switch
+		- Implement cooldown and fall times for beauty and a beat
+		- Add to accuracy function 
+	- Esther
+		- Fix unintentional audio reverb and lag 
+		- Fix preview song playing during play 
+		- Fix arrow bar location
+		- Add progress bar
+		- Add quit button to exit while playing song (exit bar)

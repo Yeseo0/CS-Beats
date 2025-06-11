@@ -2,7 +2,7 @@ import processing.sound.*;
 
 public class Play{
   double accuracy;
-  double stars;
+  double percent;
   
   SoundFile sample;
   FFT fft;
@@ -16,72 +16,94 @@ public class Play{
   int fall;
   int nextBeat = 0;
   int interval = 100;
+  int starsAdded;
   
   boolean queued = false;
+  boolean showResults = false; 
   
   Arrows arrow;
   
   PImage bg;
   
-  public Play(){
-    bg = play;
-  }
+  public boolean played = false;
   
-  void display() {
-    size(1778,1000);
-    bg = loadImage("backgrounds/stage.png");
-    
-    // cooldown and fall rate depends on difficulty and song itself 
+  public Play(int currentSong) {
+    bg = play;
+
+    sample = sample1;
+    fft = fft1;
+
+    fft.input(sample);
+
+    arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()));
+
+     // cooldown and fall rate depends on difficulty and song itself 
     if (currentSong == 0) {
       cooldown = 500;
       fall = 2730;
     } else if (currentSong == 1) {
-      cooldown = 1000;
-      fall = 11090;
-    } else if (currentSong == 3) {
-      cooldown = 500;
-      fall = 0;
+      cooldown = 900;
+      fall = 3000;
+    } else if (currentSong == 2) {
+      cooldown = 750;
+      fall = 2940;
     }
-    
-    arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()));
-    
-    sample = sample1;
-    
+
+  }
+  
+  void cooldownTime() {
     // delay in playing song
     int now = millis();
     if (cooldown <= now){
       sample.playFor(sample.duration());
     }
+    played = true;
+  }
+  
+  // displays everything
+  void display() {
+    background(bg);
+    arrow.drawBar();
     
-    fft = fft1;
-    fft.input(sample);
-    
-    generateArrow();
-   
+    if (showResults){
+      results();
+    } else {
+      generateArrow();
+    }
   }
   
   void generateArrow() {
-    background(bg);
-    arrow.drawBar();
-    text("score: " + arrow.getScore(), 40, 120);
-    accuracy = (double) (arrow.getScore() / arrow.getTotalArrows());
-    text("accuracy: " + accuracy, 60, 140); 
     
-    int currentTime = millis();
-    if (currentTime >= sample.duration()){
-      if (accuracy < 0.25){
-        stars++;
-      } else if (accuracy < 0.5){
-        stars+= 2; 
-      } else if (accuracy < 0.65){
-        stars += 3;
-      } else if (accuracy < 0.79){
-        stars += 4;
+    displayScore();
+
+    // if the song ends, go to results screen
+    if (!sample.isPlaying() && !showResults){
+      accuracy = (double) arrow.getScore() / arrow.getTotalArrows();
+      percent = accuracy*100;
+      
+      if (percent < 25){
+        starsAdded = 1;
+      } else if (percent < 50){
+        starsAdded = 2; 
+      } else if (percent < 65){
+        starsAdded = 3;
+      } else if (percent < 79){
+        starsAdded = 4;
       } else {
-        stars += 5;
+        starsAdded = 5;
       }
+      
+      if (songChoice[currentSong].getDifficulty() == 2){
+        starsAdded *= 2;
+      } else if (songChoice[currentSong].getDifficulty() == 3){
+        starsAdded *= 3;
+      }
+      
+      showResults = true;
+      return; 
     }
 
+    // otherwise, analyze using fft
     fft.analyze(spectrum);
   
     float beat = 0;
@@ -103,38 +125,53 @@ public class Play{
      if (queued && currentBeat >= nextBeat - fall){
        int randomArrow = int(random(4));
        arrow.addArrow(randomArrow);
-       arrow.incTotalArrows();
        queued = false;
      }
     
     // updates 
     arrow.update();
   }
-
-  /*void keyPressed() {
-    if (key == CODED && Arrows.size() > 0) {
-      if (keyCode == LEFT) {
-        if (arrows.get(0).getMode() == 0 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
-          deleteArrow();
-          score++;
-        }
-      } else if (keyCode == RIGHT) {
-        if (arrows.get(0).getMode() == 2 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
-          deleteArrow();
-          score++;
-        }
-      } else if (keyCode == UP) {
-        if (arrows.get(0).getMode() == 3 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
-          deleteArrow();
-          score++;
-        }
-      } else if (keyCode == DOWN) {
-        if (arrows.get(0).getMode() == 1 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
-          deleteArrow();
-          score++;
-        }
-      }
-    }
+  
+  void displayScore(){
+    fill(0, 200);
+    rect(50, 45, 500, 105, 50);
+    textFont(font);
+    textSize(100);
+    fill(255);
+    text("score: " + arrow.getScore(), 100, 120);
+    percent = 0;
   }
-  */
+  
+  // creates result screen
+  void results(){
+    fill(#000080, 200); 
+    rect(300, 250, 1280, 400, 20);
+    
+    fill(255);
+    textSize(60);
+    textFont(font);
+    textAlign(CENTER, CENTER);
+    text("accuracy: " + (int) percent + "%", 950, 340);
+    text("stars earned: " + starsAdded, 950, 420);
+    text("total stars: " + (stars + starsAdded), 950, 500);
+  
+    text("click anywhere to return to song selection!", 925, 580);
+  }
+  
+  Arrows getArrows(){
+    return arrow;
+  }
+  
+  boolean getResult(){
+    return showResults;
+  }
+  
+  void setStarsAdded(int s){
+    starsAdded = s;
+  }
+  
+  int getStarsAdded(){
+    return starsAdded;
+  }
+  
 }

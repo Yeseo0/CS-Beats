@@ -1,14 +1,18 @@
-  // imports sound library
+// imports sound library
   import processing.sound.*;
   
   // images needed (backgrounds and arrows)
   PImage bg;
-  PImage yellow, red, blue, green, arrowBar;
+  PImage yellow, red, blue, green, arrowBar, quit;
   PImage home, main1, main2, main3, play;
+  
+  // fonts
+  PFont font;
   
   // more global variables for backgrounds
   String currentScreen = "HomePage";
   PImage[] menuBackgrounds;
+  int stars = 0;
   
   // soundfile variables
   SoundFile[] previews;
@@ -31,21 +35,25 @@
      size(1778,1000);
      currentScreen = "HomePage";
      
-     // LOADING FILES 
+    // LOADING FILES 
      
-     // song files
-     clarity = new SoundFile(this, "previews/clarity_preview.MP3");
-     baab = new SoundFile(this, "previews/baab_preview.MP3");
-     ayby = new SoundFile(this, "previews/ayby_preview.MP3");
-     sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
+    // song files
+    clarity = new SoundFile(this, "previews/clarity_preview.MP3");
+    baab = new SoundFile(this, "previews/baab_preview.MP3");
+    ayby = new SoundFile(this, "previews/ayby_preview.MP3");
+    sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
+    
+    // font
+    font = createFont("Georgia", 60);
     
     // arrows
-    yellow = loadImage("arrows/yellowArrow.gif");
-    red = loadImage("arrows/redArrow.gif");
-    blue = loadImage("arrows/blueArrow.gif");
-    green = loadImage("arrows/greenArrow.gif");
+    yellow = loadImage("arrows/yellowArrow.png");
+    red = loadImage("arrows/redArrow.png");
+    blue = loadImage("arrows/blueArrow.png");
+    green = loadImage("arrows/greenArrow.png");
     arrowBar = loadImage("arrows/Arrows.png");
-    
+    quit = loadImage("arrows/Quit.png");
+
     // backgrounds
     home = loadImage("backgrounds/homepage.png");
     play = loadImage("backgrounds/stage.png");
@@ -60,62 +68,96 @@
     bg = home;
   }
   
-// displays appropriate screen depending on the currentScreen variable 
+  // displays appropriate screen depending on the currentScreen variable 
   void draw(){
     if (currentScreen.equals("HomePage")){
       x.display();
     } else if (currentScreen.equals("MainMenu")){
-      y.display();
-    } else{
-      z.display();
+      if (y.played == false) {
+        y.playSong();
+        y.played = true;
+      } else {
+        y.display();
+      }
+    } else if (currentScreen.equals("Play")){
+      if (z.played == false) {
+        z.cooldownTime();
+      } else {
+        z.display();
+      }
     }
   }
   
-  void mousePressed(){
+   void mousePressed(){
     if (currentScreen.equals("HomePage") && mouseX >= 510 && mouseX <= 1245 && mouseY >= 755 && mouseY <= 965){
-      y = new MainMenu(menuBackgrounds, previews);
+      y = new MainMenu(menuBackgrounds, previews, stars);
       currentScreen = "MainMenu";
      }
-     if (currentScreen.equals("MainMenu") && mouseX >= 470 && mouseX <= 1000 && mouseY >= 900 && mouseY <= 950){
-      z = new Play();
-      bg = play;
-      currentScreen = "Play";
+   if (currentScreen.equals("MainMenu") && mouseX >= 470 && mouseX <= 800 && mouseY >= 775 && mouseY <= 925){
+    y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
+    z = new Play(currentSong);
+    bg = play;
+    currentScreen = "Play";
     }
     if (currentScreen.equals("MainMenu") && mouseX >= 1600 && mouseX <= 1725 && mouseY >= 65 && mouseY <= 185){
+      y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
       x = new HomePage();
       bg = home;
       currentScreen = "HomePage";
     }
+    if (currentScreen.equals("Play") && mouseX >= 1525 && mouseX <= 1795 && mouseY >= 5 && mouseY <= 140) {
+      z.sample.cue(0);
+      z.sample.pause();
+      y = new MainMenu(menuBackgrounds, previews, stars);
+      currentScreen = "MainMenu";
+      y.resetBackground();
+      currentSong = 0;
+      sample1 = new SoundFile(this,songChoice[currentSong].getRoute());
+    }
+    if (currentScreen.equals("Play") && z.getResult()){
+      stars += z.getStarsAdded();
+      z.setStarsAdded(0);
+      y = new MainMenu(menuBackgrounds, previews, stars);
+      currentScreen = "MainMenu";
+      y.resetBackground();
+      currentSong = 0;
+    }
   }
+
   
-  void keyPressed(){
+   void keyPressed(){
+     
+     // use setters as instance variables are private for class!!!
+     
     if (keyCode == LEFT) { 
         if (y != null && currentScreen.equals("MainMenu")){
-          y.backgroundIndex = (y.backgroundIndex - 1 + y.backgrounds.length) % y.backgrounds.length; // moves left
-          currentSong = (currentSong - 1) % songChoice.length;
-          y.changeBackground();
+          y.changeBackgroundLeft();
+          currentSong = (currentSong - 1 + songChoice.length) % songChoice.length;
+          sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
         }
     }
     if (keyCode == RIGHT) {
-      if (y != null && currentScreen.equals("MainMenu")){
-        y.backgroundIndex = (y.backgroundIndex + 1) % y.backgrounds.length; // moves right
+      if (y != null && currentScreen.equals("MainMenu")){ 
+        y.changeBackgroundRight();
         currentSong = (currentSong + 1) % songChoice.length;
-        y.changeBackground();
+        sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
       }
     }
+    
+    // volume kinda works (global)
     if (key == 'u') {
-        y.volume = Math.min(y.volume + 0.1f, 1.0f); // increase volume
+        Sound.volume(Math.min(y.getVolume() + 0.1, 1.0));
     }
     if (key == 'd') {
       println("run");
-        y.volume = Math.max(y.volume - 0.1f, 0.0f); // decrease volume
+      Sound.volume(Math.max(y.getVolume() - 0.1, 0.0));
+        
     }
     if (currentScreen.equals("Play") && key == CODED) {
       // need to edit so that all keypresseds are in the game sketch
-      if (keyCode == LEFT) z.Arrows.left();
-      else if (keyCode == RIGHT) z.Arrows.right();
-      else if (keyCode == UP) z.Arrows.up();
-      else if (keyCode == DOWN) z.Arrows.down();
+      if (keyCode == LEFT) z.getArrows().left();
+      else if (keyCode == RIGHT) z.getArrows().right();
+      else if (keyCode == UP) z.getArrows().up();
+      else if (keyCode == DOWN) z.getArrows().down();
     }
   }
-  

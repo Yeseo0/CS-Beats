@@ -1,10 +1,11 @@
 import processing.sound.*;
 
 public class Song{
-  private String name;
-  private String route; // file route
-  private String singer;
-  private int difficulty;
+
+  String name;
+  String route; // file route
+  String singer;
+  int difficulty;
   
   public Song(String name, String route, String singer, int difficulty){
     this.name = name;
