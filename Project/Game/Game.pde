@@ -89,39 +89,39 @@
   }
   
    void mousePressed(){
-    if (currentScreen.equals("HomePage") && mouseX >= 510 && mouseX <= 1245 && mouseY >= 755 && mouseY <= 965){
-      y = new MainMenu(menuBackgrounds, previews, stars);
-      currentScreen = "MainMenu";
-     }
-   if (currentScreen.equals("MainMenu") && mouseX >= 470 && mouseX <= 800 && mouseY >= 775 && mouseY <= 925){
-    y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
-    z = new Play(currentSong);
-    bg = play;
-    currentScreen = "Play";
-    }
-    if (currentScreen.equals("MainMenu") && mouseX >= 1600 && mouseX <= 1725 && mouseY >= 65 && mouseY <= 185){
-      y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
-      x = new HomePage();
-      bg = home;
-      currentScreen = "HomePage";
-    }
-    if (currentScreen.equals("Play") && mouseX >= 1525 && mouseX <= 1795 && mouseY >= 5 && mouseY <= 140) {
-      z.sample.cue(0);
-      z.sample.pause();
-      y = new MainMenu(menuBackgrounds, previews, stars);
-      currentScreen = "MainMenu";
-      y.resetBackground();
-      currentSong = 0;
-      sample1 = new SoundFile(this,songChoice[currentSong].getRoute());
-    }
-    if (currentScreen.equals("Play") && z.getResult()){
-      stars += z.getStarsAdded();
-      z.setStarsAdded(0);
-      y = new MainMenu(menuBackgrounds, previews, stars);
-      currentScreen = "MainMenu";
-      y.resetBackground();
-      currentSong = 0;
-    }
+      if (currentScreen.equals("HomePage") && mouseX >= 510 && mouseX <= 1245 && mouseY >= 755 && mouseY <= 965){
+        y = new MainMenu(menuBackgrounds, previews, stars);
+        currentScreen = "MainMenu";
+       }
+       if (currentScreen.equals("MainMenu") && mouseX >= 470 && mouseX <= 800 && mouseY >= 775 && mouseY <= 925){
+        y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
+        z = new Play(currentSong);
+        bg = play;
+        currentScreen = "Play";
+      }
+      if (currentScreen.equals("MainMenu") && mouseX >= 1600 && mouseX <= 1725 && mouseY >= 65 && mouseY <= 185){
+        y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
+        x = new HomePage();
+        bg = home;
+        currentScreen = "HomePage";
+      }
+      if (currentScreen.equals("Play") && mouseX >= 1525 && mouseX <= 1795 && mouseY >= 5 && mouseY <= 140) {
+        z.sample.cue(0);
+        z.sample.pause();
+        y = new MainMenu(menuBackgrounds, previews, stars);
+        currentScreen = "MainMenu";
+        y.resetBackground();
+        currentSong = 0;
+        sample1 = new SoundFile(this,songChoice[currentSong].getRoute());
+      }
+      if (currentScreen.equals("Play") && z.getResult()){
+        stars += z.getStarsAdded();
+        z.setStarsAdded(0);
+        y = new MainMenu(menuBackgrounds, previews, stars);
+        currentScreen = "MainMenu";
+        y.resetBackground();
+        currentSong = 0;
+      }
   }
 
   
