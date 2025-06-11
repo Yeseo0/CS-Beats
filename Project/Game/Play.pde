@@ -22,42 +22,45 @@ public class Play{
   
   PImage bg;
   
+  public boolean played = false;
+  
   public Play(int currentSong) {
     bg = play;
-    
+
     sample = sample1;
     fft = fft1;
-    
+
     fft.input(sample);
-    
+
     arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()));
-    
+
      // cooldown and fall rate depends on difficulty and song itself 
     if (currentSong == 0) {
       cooldown = 500;
       fall = 2730;
     } else if (currentSong == 1) {
-      cooldown = 1000;
-      fall = 11090;
-    } else if (currentSong == 3) {
-      cooldown = 500;
-      fall = 0;
+      cooldown = 900;
+      fall = 3000;
+    } else if (currentSong == 2) {
+      cooldown = 750;
+      fall = 2940;
     }
-    
+
+  }
+  
+  void cooldownTime() {
+        // delay in playing song
+    int now = millis();
+    if (cooldown <= now){
+      sample.playFor(sample.duration());
+    }
+    played = true;
   }
   
   void display() {
     background(bg);
     arrow.drawBar();
-    
-    // delay in playing song
-    int now = millis();
-    if (cooldown <= now){
-      sample.playFor(sample.duration());
-    }
-    
     generateArrow();
-   
   }
   
   void generateArrow() {
