@@ -74,13 +74,7 @@ public class Play{
   
   void generateArrow() {
     
-    fill(0, 200);
-    rect(50, 45, 500, 105, 50);
-    textFont(font);
-    textSize(100);
-    fill(255);
-    text("score: " + arrow.getScore(), 100, 120);
-    percent = 0;
+    displayScore();
 
     // if the song ends, go to results screen
     if (!sample.isPlaying() && !showResults){
@@ -138,10 +132,20 @@ public class Play{
     arrow.update();
   }
   
+  void displayScore(){
+    fill(0, 200);
+    rect(50, 45, 500, 105, 50);
+    textFont(font);
+    textSize(100);
+    fill(255);
+    text("score: " + arrow.getScore(), 100, 120);
+    percent = 0;
+  }
+  
   // creates result screen
   void results(){
     fill(#000080, 200); 
-    rect(300, 300, 1280, 500, 20);
+    rect(300, 250, 1280, 400, 20);
     
     fill(255);
     textSize(60);
@@ -151,7 +155,7 @@ public class Play{
     text("stars earned: " + starsAdded, 950, 420);
     text("total stars: " + (stars + starsAdded), 950, 500);
   
-    text("click anywhere to return to song selection!", 900, 580);
+    text("click anywhere to return to song selection!", 925, 580);
   }
   
   Arrows getArrows(){
