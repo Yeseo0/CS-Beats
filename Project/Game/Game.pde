@@ -119,6 +119,8 @@
       z.setStarsAdded(0);
       y = new MainMenu(menuBackgrounds, previews, stars);
       currentScreen = "MainMenu";
+      y.resetBackground();
+      currentSong = 0;
     }
   }
 

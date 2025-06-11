@@ -3,7 +3,6 @@ import processing.sound.*;
  
  public class MainMenu{  
   private ArrayList<String> songList = new ArrayList<>();
-  private ArrayList<Double> difficultyList = new ArrayList<>();
   private float volume = 0.5; // default volume
   private int backgroundIndex = 0; // current previewing song
   private int lastBackgroundIndex = 0;
@@ -22,16 +21,11 @@ import processing.sound.*;
     songList.add("Clarity");
     songList.add("Beauty and a Beat");
     songList.add("Are You Bored Yet?");
-    
-    // number of stars to be earned upon completion
-     difficultyList.add((double)1.0); // clarity --> easy
-     difficultyList.add((double)2.0); // beauty and a beat --> medium
-     difficultyList.add((double)3.0); // are you bored yet --> hard
      
-     songPreviews = new SoundFile[3];
-     songPreviews[0] = clarity;
-     songPreviews[1] = baab;
-     songPreviews[2] = ayby;
+    songPreviews = new SoundFile[3];
+    songPreviews[0] = clarity;
+    songPreviews[1] = baab;
+    songPreviews[2] = ayby;
   }
   
   void display(){
