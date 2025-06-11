@@ -91,6 +91,7 @@
    void mousePressed(){
     if (currentScreen.equals("HomePage") && mouseX >= 510 && mouseX <= 1245 && mouseY >= 755 && mouseY <= 965){
       y = new MainMenu(menuBackgrounds, previews, stars);
+      y.resetBackground();
       currentScreen = "MainMenu";
      }
    if (currentScreen.equals("MainMenu") && mouseX >= 470 && mouseX <= 800 && mouseY >= 775 && mouseY <= 925){
@@ -146,13 +147,12 @@
     
     // volume kinda works (global)
     if (key == 'u') {
-        Sound.volume(Math.min(y.getVolume() + 0.1, 1.0));
+      y.setVolume(Math.min(y.getVolume() + 0.1, 1.0));
     }
     if (key == 'd') {
-      println("run");
-      Sound.volume(Math.max(y.getVolume() - 0.1, 0.0));
-        
+      y.setVolume(Math.min(y.getVolume() + 0.1, 1.0));
     }
+    
     if (currentScreen.equals("Play") && key == CODED) {
       // need to edit so that all keypresseds are in the game sketch
       if (keyCode == LEFT) z.getArrows().left();
