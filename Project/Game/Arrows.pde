@@ -45,6 +45,7 @@ public class Arrows {
   
   void drawBar() {
     image(arrowBar, 350, 800);
+    image(quit, 1515, 0, 280, 140);
   }
   
   void drawArrow(PVector arrow, int mode) {

@@ -3,7 +3,7 @@
   
   // images needed (backgrounds and arrows)
   PImage bg;
-  PImage yellow, red, blue, green, arrowBar;
+  PImage yellow, red, blue, green, arrowBar, quit;
   PImage home, main1, main2, main3, play;
   
   // more global variables for backgrounds
@@ -46,6 +46,7 @@
     blue = loadImage("arrows/blueArrow.png");
     green = loadImage("arrows/greenArrow.png");
     arrowBar = loadImage("arrows/Arrows.png");
+    quit = loadImage("arrows/Quit.png");
     
     // backgrounds
     home = loadImage("backgrounds/homepage.png");
@@ -61,7 +62,7 @@
     bg = home;
   }
   
-// displays appropriate screen depending on the currentScreen variable 
+  // displays appropriate screen depending on the currentScreen variable 
   void draw(){
     if (currentScreen.equals("HomePage")){
       x.display();
@@ -86,17 +87,26 @@
       y = new MainMenu(menuBackgrounds, previews, stars);
       currentScreen = "MainMenu";
      }
-     if (currentScreen.equals("MainMenu") && mouseX >= 470 && mouseX <= 800 && mouseY >= 775 && mouseY <= 925){
-      y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
-      z = new Play(currentSong);
-      bg = play;
-      currentScreen = "Play";
+   if (currentScreen.equals("MainMenu") && mouseX >= 470 && mouseX <= 800 && mouseY >= 775 && mouseY <= 925){
+    y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
+    z = new Play(currentSong);
+    bg = play;
+    currentScreen = "Play";
     }
     if (currentScreen.equals("MainMenu") && mouseX >= 1600 && mouseX <= 1725 && mouseY >= 65 && mouseY <= 185){
       y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
       x = new HomePage();
       bg = home;
       currentScreen = "HomePage";
+    }
+    if (currentScreen.equals("Play") && mouseX >= 1525 && mouseX <= 1795 && mouseY >= 5 && mouseY <= 140) {
+      z.sample.cue(0);
+      z.sample.pause();
+      y = new MainMenu(menuBackgrounds, previews, stars);
+      currentScreen = "MainMenu";
+      y.resetBackground();
+      currentSong = 0;
+      sample1 = new SoundFile(this,songChoice[currentSong].getRoute());
     }
   }
 
@@ -108,7 +118,7 @@
     if (keyCode == LEFT) { 
         if (y != null && currentScreen.equals("MainMenu")){
           y.changeBackgroundLeft();
-          currentSong = (currentSong - 1 + songChoice.length) % songChoice.length; // moving left doesn't work
+          currentSong = (currentSong - 1 + songChoice.length) % songChoice.length;
           sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
         }
     }

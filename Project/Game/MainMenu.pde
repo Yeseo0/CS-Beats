@@ -76,6 +76,13 @@ import processing.sound.*;
       }
   }
   
+  void resetBackground() {
+    backgroundIndex = 0;
+    bg = backgrounds[backgroundIndex];
+    playSong();
+    lastBackgroundIndex = backgroundIndex;
+  }
+  
   void changeBackgroundLeft(){
     songPreviews[lastBackgroundIndex].stop();
     backgroundIndex = (backgroundIndex + 1) % songPreviews.length;
