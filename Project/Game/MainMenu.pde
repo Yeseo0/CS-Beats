@@ -1,4 +1,4 @@
- import processing.sound.*;
+import processing.sound.*;
  import java.util.ArrayList;
  
  public class MainMenu{  
@@ -10,6 +10,7 @@
   private SoundFile[] songPreviews; // array of song preview files
   private PImage[] backgrounds = menuBackgrounds; // array of song backgrounds
   private int stars;
+  public boolean played = false;
   
   public MainMenu(PImage[] background, SoundFile[] previews, int stars){
     this.backgrounds = background;
@@ -36,23 +37,24 @@
   void display(){
     background(0);
     image(bg, 0, 0);
-    text("stars: " + stars, 40, 40);
+    textSize(100);
+    text("stars: " + stars, 1000, 120);
   }
   
   public int getBackgroundIndex(){
     return backgroundIndex;
   }
   
-  public int getLastBackgroundIndex(){
-    return lastBackgroundIndex;
-  }
-  
   public void setBackgroundIndex(int index){
     backgroundIndex = index;
   }
   
-  public void setLastBackgroundIndex(int index){
-   lastBackgroundIndex = index;
+  public SoundFile[] getPreviewArray(){
+    return songPreviews;
+  }
+  
+  public int getLastBackgroundIndex(){
+    return lastBackgroundIndex;
   }
   
   public void setVolume(float v){
@@ -69,17 +71,25 @@
   
   private void playSong(){
     if (songPreviews[backgroundIndex] != null) {
-          songPreviews[backgroundIndex].stop(); // stop previous preview if playing
           songPreviews[backgroundIndex].amp(volume); // set low volume
           songPreviews[backgroundIndex].loop();
       }
   }
   
-  void changeBackground(){
+  void changeBackgroundLeft(){
+    songPreviews[lastBackgroundIndex].stop();
     backgroundIndex = (backgroundIndex + 1) % songPreviews.length;
     bg = backgrounds[backgroundIndex];
     playSong();
-
+    lastBackgroundIndex = backgroundIndex;
+  }
+  
+  void changeBackgroundRight(){
+    songPreviews[lastBackgroundIndex].stop();
+    backgroundIndex = (backgroundIndex - 1 + songPreviews.length) % songPreviews.length;
+    bg = backgrounds[backgroundIndex];
+    playSong();
+    lastBackgroundIndex = backgroundIndex;
   }
 
  }

@@ -22,6 +22,8 @@ public class Play{
   
   PImage bg;
   
+  public boolean played = false;
+  
   public Play(int currentSong) {
     bg = play;
     
@@ -37,53 +39,66 @@ public class Play{
       cooldown = 500;
       fall = 2730;
     } else if (currentSong == 1) {
-      cooldown = 1000;
-      fall = 11090;
-    } else if (currentSong == 3) {
-      cooldown = 500;
-      fall = 0;
+      cooldown = 900;
+      fall = 3000;
+    } else if (currentSong == 2) {
+      cooldown = 750;
+      fall = 2940;
     }
     
   }
   
-  void display() {
-    background(bg);
-    
-    // delay in playing song
+  void cooldownTime() {
+        // delay in playing song
     int now = millis();
     if (cooldown <= now){
       sample.playFor(sample.duration());
     }
-    
+    played = true;
+  }
+  
+  void display() {
+    background(bg);
+    arrow.drawBar();
     generateArrow();
-   
   }
   
   void generateArrow() {
-    arrow.drawBar();
     
     textSize(100);
     text("score: " + arrow.getScore(), 40, 120);
     if (arrow.getTotalArrows() != 0){
-      accuracy = (double) (arrow.getScore() / arrow.getTotalArrows());
+      accuracy = (double) arrow.getScore() / arrow.getTotalArrows();
+      int percent = (int)(accuracy*10000);
       textSize(100);
-      text("accuracy: " + accuracy, 40, 220); 
+      text("accuracy: " + percent, 40, 220); 
     }
     
-    int currentTime = millis();
-    if (currentTime >= sample.duration()){
-      if (accuracy < 0.25){
+    if (!sample.isPlaying()){
+      if (accuracy <= 25){
         stars++;
-      } else if (accuracy < 0.5){
+      } else if (accuracy <= 50){
         stars+= 2; 
-      } else if (accuracy < 0.65){
+      } else if (accuracy <= 65){
         stars += 3;
-      } else if (accuracy < 0.79){
+      } else if (accuracy <= 79){
         stars += 4;
       } else {
         stars += 5;
       }
+      
+      if (songChoice[currentSong].getDifficulty() == 2){
+        stars *= 2;
+      } else if (songChoice[currentSong].getDifficulty() == 3){
+        stars *= 3;
+      }
+      
+      y = new MainMenu(menuBackgrounds, previews, stars);
+      bg = home;
+      currentScreen = "MainMenu";
+      return; 
     }
+  
 
     fft.analyze(spectrum);
   
@@ -106,7 +121,6 @@ public class Play{
      if (queued && currentBeat >= nextBeat - fall){
        int randomArrow = int(random(4));
        arrow.addArrow(randomArrow);
-       arrow.incTotalArrows();
        queued = false;
      }
     

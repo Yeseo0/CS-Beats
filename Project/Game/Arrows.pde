@@ -15,28 +15,28 @@ public class Arrows {
   }
   
   public void left(){
-    if (arrows.size() > 0 && arrows.get(0).getMode() == 0 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+    if (arrows.size() > 0 && arrows.get(0).getMode() == 0 && (arrows.get(0).getPos().y > 770 && arrows.get(0).getPos().y < 850)) {
           deleteArrow();
           score++;
     }
   }
   
   public void right(){
-    if (arrows.size() > 0 && arrows.get(0).getMode() == 2 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+    if (arrows.size() > 0 && arrows.get(0).getMode() == 2 && (arrows.get(0).getPos().y > 770 && arrows.get(0).getPos().y < 850)) {
           deleteArrow();
           score++;
     }
   }
   
   public void up(){
-    if (arrows.size() > 0 && arrows.get(0).getMode() == 3 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+    if (arrows.size() > 0 && arrows.get(0).getMode() == 3 && (arrows.get(0).getPos().y > 770 && arrows.get(0).getPos().y < 850)) {
           deleteArrow();
           score++;
     }
   }
   
   public void down(){
-    if (arrows.size() > 0 && arrows.get(0).getMode() == 1 && (arrows.get(0).getPos().y > 830 && arrows.get(0).getPos().y < 900)) {
+    if (arrows.size() > 0 && arrows.get(0).getMode() == 1 && (arrows.get(0).getPos().y > 770 && arrows.get(0).getPos().y < 850)) {
           deleteArrow();
           score++;
     }
@@ -44,7 +44,7 @@ public class Arrows {
 
   
   void drawBar() {
-    image(arrowBar, 350, 850);
+    image(arrowBar, 350, 800);
   }
   
   void drawArrow(PVector arrow, int mode) {
@@ -90,7 +90,7 @@ public class Arrows {
   void update() {
     for (int i = arrows.size() - 1; i >= 0; i--) {
       Arrow arr = arrows.get(i);
-      if (arr.getPos().y > 900) {
+      if (arr.getPos().y > 850) { //change the number later
         moveArrow(arr);
       } else {
         if (i < pastA.size()) {
