@@ -49,7 +49,6 @@ public class Arrows {
   }
   
   void drawArrow(PVector arrow, int mode) {
-    incTotalArrows();
     if (mode==0){
       image(red,775,arrow.y,162,162);
     }
@@ -69,6 +68,7 @@ public class Arrows {
     arrowNames.add(counter);
     counter++;
     arrows.add(count);
+    incTotalArrows();
   }
   
   public void deleteArrow() {
