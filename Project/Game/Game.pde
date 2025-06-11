@@ -47,8 +47,7 @@
     green = loadImage("arrows/greenArrow.png");
     arrowBar = loadImage("arrows/Arrows.png");
     quit = loadImage("arrows/Quit.png");
-    
-    
+
     // backgrounds
     home = loadImage("backgrounds/homepage.png");
     play = loadImage("backgrounds/stage.png");
@@ -63,7 +62,7 @@
     bg = home;
   }
   
-// displays appropriate screen depending on the currentScreen variable 
+  // displays appropriate screen depending on the currentScreen variable 
   void draw(){
     if (currentScreen.equals("HomePage")){
       x.display();

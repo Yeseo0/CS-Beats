@@ -67,23 +67,31 @@ public class Play{
     
     textSize(100);
     text("score: " + arrow.getScore(), 40, 120);
+    int percent = 0;
     if (arrow.getTotalArrows() != 0){
-      accuracy = (double) (arrow.getScore() / arrow.getTotalArrows());
+      accuracy = (double) arrow.getScore() / arrow.getTotalArrows();
+      percent = (int)(accuracy*10000);
       textSize(100);
-      text("accuracy: " + accuracy, 40, 220); 
+      text("accuracy: " + percent, 40, 220); 
     }
     
     if (!sample.isPlaying()){
-      if (accuracy < 0.25){
+      if (percent <= 25){
         stars++;
-      } else if (accuracy < 0.5){
+      } else if (percent <= 50){
         stars+= 2; 
-      } else if (accuracy < 0.65){
+      } else if (percent <= 65){
         stars += 3;
-      } else if (accuracy < 0.79){
+      } else if (percent <= 79){
         stars += 4;
       } else {
         stars += 5;
+      }
+      
+      if (songChoice[currentSong].getDifficulty() == 2){
+        stars *= 2;
+      } else if (songChoice[currentSong].getDifficulty() == 3){
+        stars *= 3;
       }
       
       y = new MainMenu(menuBackgrounds, previews, stars);
@@ -114,7 +122,6 @@ public class Play{
      if (queued && currentBeat >= nextBeat - fall){
        int randomArrow = int(random(4));
        arrow.addArrow(randomArrow);
-       arrow.incTotalArrows();
        queued = false;
      }
     
