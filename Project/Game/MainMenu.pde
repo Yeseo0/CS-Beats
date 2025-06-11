@@ -37,8 +37,12 @@ import processing.sound.*;
   void display(){
     background(0);
     image(bg, 0, 0);
+    fill(0, 200);
+    rect(1050, 70, 450, 100, 50);
+    textFont(font);
     textSize(100);
-    text("stars: " + stars, 1000, 120);
+    fill(255);
+    text("stars: " + stars, 1100, 150);
   }
   
   public int getBackgroundIndex(){

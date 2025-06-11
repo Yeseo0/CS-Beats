@@ -2,6 +2,7 @@ import processing.sound.*;
 
 public class Play{
   double accuracy;
+  double percent;
   
   SoundFile sample;
   FFT fft;
@@ -15,8 +16,10 @@ public class Play{
   int fall;
   int nextBeat = 0;
   int interval = 100;
+  int starsAdded;
   
   boolean queued = false;
+  boolean showResults = false; 
   
   Arrows arrow;
   
@@ -49,7 +52,7 @@ public class Play{
   }
   
   void cooldownTime() {
-        // delay in playing song
+    // delay in playing song
     int now = millis();
     if (cooldown <= now){
       sample.playFor(sample.duration());
@@ -57,50 +60,56 @@ public class Play{
     played = true;
   }
   
+  // displays everything
   void display() {
     background(bg);
     arrow.drawBar();
-    generateArrow();
+    
+    if (showResults){
+      results();
+    } else {
+      generateArrow();
+    }
   }
   
   void generateArrow() {
     
+    fill(0, 200);
+    rect(50, 45, 500, 105, 50);
+    textFont(font);
     textSize(100);
-    text("score: " + arrow.getScore(), 40, 120);
-    int percent = 0;
-    if (arrow.getTotalArrows() != 0){
+    fill(255);
+    text("score: " + arrow.getScore(), 100, 120);
+    percent = 0;
+
+    // if the song ends, go to results screen
+    if (!sample.isPlaying() && !showResults){
       accuracy = (double) arrow.getScore() / arrow.getTotalArrows();
-      percent = (int)(accuracy*10000);
-      textSize(100);
-      text("accuracy: " + percent, 40, 220); 
-    }
-    
-    if (!sample.isPlaying()){
-      if (percent <= 25){
-        stars++;
-      } else if (percent <= 50){
-        stars+= 2; 
-      } else if (percent <= 65){
-        stars += 3;
-      } else if (percent <= 79){
-        stars += 4;
+      percent = accuracy*100;
+      
+      if (percent < 25){
+        starsAdded = 1;
+      } else if (percent < 50){
+        starsAdded = 2; 
+      } else if (percent < 65){
+        starsAdded = 3;
+      } else if (percent < 79){
+        starsAdded = 4;
       } else {
-        stars += 5;
+        starsAdded = 5;
       }
       
       if (songChoice[currentSong].getDifficulty() == 2){
-        stars *= 2;
+        starsAdded *= 2;
       } else if (songChoice[currentSong].getDifficulty() == 3){
-        stars *= 3;
+        starsAdded *= 3;
       }
       
-      y = new MainMenu(menuBackgrounds, previews, stars);
-      bg = home;
-      currentScreen = "MainMenu";
+      showResults = true;
       return; 
     }
-  
 
+    // otherwise, analyze using fft
     fft.analyze(spectrum);
   
     float beat = 0;
@@ -129,8 +138,36 @@ public class Play{
     arrow.update();
   }
   
+  // creates result screen
+  void results(){
+    fill(#000080, 200); 
+    rect(300, 300, 1280, 500, 20);
+    
+    fill(255);
+    textSize(60);
+    textFont(font);
+    textAlign(CENTER, CENTER);
+    text("accuracy: " + (int) percent + "%", 950, 340);
+    text("stars earned: " + starsAdded, 950, 420);
+    text("total stars: " + (stars + starsAdded), 950, 500);
+  
+    text("click anywhere to return to song selection!", 900, 580);
+  }
+  
   Arrows getArrows(){
     return arrow;
   }
-
+  
+  boolean getResult(){
+    return showResults;
+  }
+  
+  void setStarsAdded(int s){
+    starsAdded = s;
+  }
+  
+  int getStarsAdded(){
+    return starsAdded;
+  }
+  
 }

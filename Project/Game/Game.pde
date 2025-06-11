@@ -6,6 +6,9 @@
   PImage yellow, red, blue, green, arrowBar, quit;
   PImage home, main1, main2, main3, play;
   
+  // fonts
+  PFont font;
+  
   // more global variables for backgrounds
   String currentScreen = "HomePage";
   PImage[] menuBackgrounds;
@@ -32,13 +35,16 @@
      size(1778,1000);
      currentScreen = "HomePage";
      
-     // LOADING FILES 
+    // LOADING FILES 
      
-     // song files
-     clarity = new SoundFile(this, "previews/clarity_preview.MP3");
-     baab = new SoundFile(this, "previews/baab_preview.MP3");
-     ayby = new SoundFile(this, "previews/ayby_preview.MP3");
-     sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
+    // song files
+    clarity = new SoundFile(this, "previews/clarity_preview.MP3");
+    baab = new SoundFile(this, "previews/baab_preview.MP3");
+    ayby = new SoundFile(this, "previews/ayby_preview.MP3");
+    sample1 = new SoundFile(this, songChoice[currentSong].getRoute());
+    
+    // font
+    font = createFont("Georgia", 60);
     
     // arrows
     yellow = loadImage("arrows/yellowArrow.png");
@@ -107,6 +113,12 @@
       y.resetBackground();
       currentSong = 0;
       sample1 = new SoundFile(this,songChoice[currentSong].getRoute());
+    }
+    if (currentScreen.equals("Play") && z.getResult()){
+      stars += z.getStarsAdded();
+      z.setStarsAdded(0);
+      y = new MainMenu(menuBackgrounds, previews, stars);
+      currentScreen = "MainMenu";
     }
   }
 
