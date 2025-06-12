@@ -42,7 +42,7 @@ public class Play{
       cooldown = 500;
       fall = 2730;
     } else if (currentSong == 1) {
-      cooldown = 850;
+      cooldown = 900;
       fall = 3000;
     } else if (currentSong == 2) {
       cooldown = 750;
@@ -132,7 +132,6 @@ public class Play{
   }
   
   void displayScore(){
-    resetMatrix();
     fill(0, 200);
     rect(50, 45, 500, 105, 50);
     textFont(font);
@@ -140,12 +139,10 @@ public class Play{
     fill(255);
     text("Score: " + arrow.getScore(), 100, 120);
     percent = 0;
-    resetMatrix();
   }
   
   // creates result screen
   void results(){
-    resetMatrix();
     fill(#000080, 200); 
     rect(300, 250, 1280, 400, 20);
     
@@ -158,8 +155,6 @@ public class Play{
     text("Total Stars: " + (stars + starsAdded), 950, 500);
   
     text("Click anywhere to return to song selection!", 925, 580);
-    
-    resetMatrix();
   }
   
   Arrows getArrows(){
