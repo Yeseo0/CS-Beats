@@ -64,7 +64,7 @@ public class Play{
     background(bg);
     arrow.drawBar();
     
-    if (showResults && arrow.getTotalArrows() == 0){
+    if (showResults){
       results();
     } else {
       generateArrow();

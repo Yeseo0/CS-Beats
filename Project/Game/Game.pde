@@ -152,9 +152,13 @@
     // volume kinda works (global)
     if (key == 'u') {
       y.setVolume(Math.min(y.getVolume() + 0.1, 1.0));
+      y.getPreviewArray()[y.getBackgroundIndex()].amp(y.getVolume());
+      sample1.amp(y.getVolume());
     }
     if (key == 'd') {
-      y.setVolume(Math.min(y.getVolume() - 0.1, 1.0));
+      y.setVolume(Math.max(y.getVolume() - 0.1, 0.0));
+      y.getPreviewArray()[y.getBackgroundIndex()].amp(y.getVolume());
+      sample1.amp(y.getVolume());
     }
     System.out.println(y.getVolume());
     

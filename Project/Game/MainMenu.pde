@@ -3,7 +3,7 @@ import processing.sound.*;
  
  public class MainMenu{  
   private ArrayList<String> songList = new ArrayList<>();
-  private float volume = 0.3; // default volume
+  private float volume = 0.5; // default volume
   private int backgroundIndex = 0; // current previewing song
   private int lastBackgroundIndex = 0;
   private SoundFile[] songPreviews; // array of song preview files
@@ -77,7 +77,7 @@ import processing.sound.*;
   
   private void playSong(){
     if (songPreviews[backgroundIndex] != null) {
-          songPreviews[backgroundIndex].amp(volume); // set low volume
+          songPreviews[backgroundIndex].amp(0.5 * volume); // set low volume
           songPreviews[backgroundIndex].loop();
       }
   }
