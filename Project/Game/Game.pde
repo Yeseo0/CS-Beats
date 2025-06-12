@@ -1,6 +1,8 @@
 // imports sound library
   import processing.sound.*;
   
+  static float volume = 0.3; // default volume
+  
   // images needed (backgrounds and arrows)
   PImage bg;
   PImage yellow, red, blue, green, arrowBar, quit;

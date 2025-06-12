@@ -63,6 +63,7 @@ import processing.sound.*;
   
   public void setVolume(float v){
     volume = v;
+    songPreviews[backgroundIndex].amp(volume);
   }
 
   public float getVolume(){

@@ -38,13 +38,13 @@ public class Play{
     arrow = new Arrows((int) Math.pow(2, songChoice[currentSong].getDifficulty()));
 
      // cooldown and fall rate depends on difficulty and song itself 
-    if (currentSong == 0) {
+    if (currentSong == 0) { // clarity
       cooldown = 500;
       fall = 2730;
-    } else if (currentSong == 1) {
+    } else if (currentSong == 1) { //ayby
       cooldown = 900;
       fall = 3000;
-    } else if (currentSong == 2) {
+    } else if (currentSong == 2) { //baab
       cooldown = 750;
       fall = 2940;
     }
