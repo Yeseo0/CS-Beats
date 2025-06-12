@@ -125,6 +125,7 @@
       currentScreen = "MainMenu";
       y.resetBackground();
       currentSong = 0;
+      sample1 = new SoundFile(this,songChoice[currentSong].getRoute());
       return;
     }
   }
