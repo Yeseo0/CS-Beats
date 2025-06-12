@@ -42,7 +42,7 @@ public class Play{
       cooldown = 500;
       fall = 2730;
     } else if (currentSong == 1) {
-      cooldown = 900;
+      cooldown = 850;
       fall = 3000;
     } else if (currentSong == 2) {
       cooldown = 750;
