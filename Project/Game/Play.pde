@@ -9,7 +9,7 @@ public class Play{
   
   float[] spectrum = new float[256]; // needs to be power of 2
   
-  float threshold = 2; // minimum energy to count as a beat
+  float threshold = 1.75; // minimum energy to count as a beat
   int cooldown; // how long to wait between beats
   int lastBeat = 0;
   
@@ -45,8 +45,8 @@ public class Play{
       cooldown = 900;
       fall = 3000;
     } else if (currentSong == 2) { //baab
-      cooldown = 750;
-      fall = 2940;
+      cooldown = 700;
+      fall = 2900;
     }
   }
   
@@ -133,8 +133,9 @@ public class Play{
   
   void displayScore(){
     fill(0, 200);
-    rect(50, 45, 500, 105, 50);
+    rect(50, 45, 550, 105, 50);
     textFont(font);
+    textAlign(50, 45);
     textSize(100);
     fill(255);
     text("Score: " + arrow.getScore(), 100, 120);

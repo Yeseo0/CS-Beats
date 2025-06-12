@@ -36,7 +36,7 @@ import processing.sound.*;
   
   void displayText(){
     translate(0, 0);
-    rect(1050, 70, 450, 100, 50);
+    rect(1050, 70, 500, 100, 50);
     fill(255);
     textFont(font);
     textSize(100);
