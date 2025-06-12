@@ -50,10 +50,6 @@ public class Play{
     }
   }
   
-  void setVolume(float volume){
-    songChoice[currentSong].getRoute().amp(volume);
-  }
-  
   void cooldownTime() {
     // delay in playing song
     int now = millis();
@@ -68,7 +64,7 @@ public class Play{
     background(bg);
     arrow.drawBar();
     
-    if (showResults && arrow.getTotalArrows() == 0){
+    if (showResults){
       results();
     } else {
       generateArrow();
@@ -136,7 +132,6 @@ public class Play{
   }
   
   void displayScore(){
-    resetMatrix();
     fill(0, 200);
     rect(50, 45, 500, 105, 50);
     textFont(font);
@@ -144,12 +139,10 @@ public class Play{
     fill(255);
     text("Score: " + arrow.getScore(), 100, 120);
     percent = 0;
-    resetMatrix();
   }
   
   // creates result screen
   void results(){
-    resetMatrix();
     fill(#000080, 200); 
     rect(300, 250, 1280, 400, 20);
     
@@ -162,8 +155,6 @@ public class Play{
     text("Total Stars: " + (stars + starsAdded), 950, 500);
   
     text("Click anywhere to return to song selection!", 925, 580);
-    
-    resetMatrix();
   }
   
   Arrows getArrows(){

@@ -67,7 +67,6 @@
     previews = new SoundFile[]{clarity, baab, ayby};
     
     x = new HomePage();
-    currentScreen = "HomePage";
     bg = home;
   }
   
@@ -98,11 +97,11 @@
       return;
      }
    if (currentScreen.equals("MainMenu") && mouseX >= 470 && mouseX <= 800 && mouseY >= 775 && mouseY <= 925){
-    y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
-    z = new Play(currentSong);
-    bg = play;
-    currentScreen = "Play";
-    return;
+      y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
+      z = new Play(currentSong);
+      bg = play;
+      currentScreen = "Play";
+      return;
     }
     if (currentScreen.equals("MainMenu") && mouseX >= 1600 && mouseX <= 1725 && mouseY >= 65 && mouseY <= 185){
       y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
@@ -134,8 +133,7 @@
 
    void keyPressed(){
      
-     // use setters as instance variables are private for class!!!
-     
+    // switching songs
     if (keyCode == LEFT) { 
         if (y != null && currentScreen.equals("MainMenu")){
           y.changeBackgroundLeft();
@@ -151,20 +149,20 @@
       }
     }
     
-    // volume kinda works (global)
+    // volume
     if (key == 'u') {
-      volume = Math.min(volume + 0.1, 1.0);
-      if (currentScreen.equals("MainMenu")) y.setVolume(volume);
-      if (currentScreen.equals("Play")) z.setVolume(volume);
+      y.setVolume(Math.min(y.getVolume() + 0.1, 1.0));
+      y.getPreviewArray()[y.getBackgroundIndex()].amp(y.getVolume());
+      sample1.amp(y.getVolume());
     }
+    
     if (key == 'd') {
-      volume = Math.max(volume - 0.1, 0.0);
-      if (currentScreen.equals("MainMenu")) y.setVolume(volume);
-      if (currentScreen.equals("Play")) z.setVolume(volume);
+      y.setVolume(Math.max(y.getVolume() - 0.1, 0.0));
+      y.getPreviewArray()[y.getBackgroundIndex()].amp(y.getVolume());
+      sample1.amp(y.getVolume());
     }
     
     if (currentScreen.equals("Play") && key == CODED) {
-      // need to edit so that all keypresseds are in the game sketch
       if (keyCode == LEFT) z.getArrows().left();
       else if (keyCode == RIGHT) z.getArrows().right();
       else if (keyCode == UP) z.getArrows().up();

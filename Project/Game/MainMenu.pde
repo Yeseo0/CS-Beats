@@ -3,6 +3,7 @@ import processing.sound.*;
  
  public class MainMenu{  
   private ArrayList<String> songList = new ArrayList<>();
+  private float volume = 0.5; // default volume
   private int backgroundIndex = 0; // current previewing song
   private int lastBackgroundIndex = 0;
   private SoundFile[] songPreviews; // array of song preview files
@@ -34,7 +35,6 @@ import processing.sound.*;
   }
   
   void displayText(){
-    resetMatrix();
     translate(0, 0);
     rect(1050, 70, 450, 100, 50);
     fill(255);
@@ -43,7 +43,6 @@ import processing.sound.*;
     textAlign(1050, 70);
     text("Stars: " + stars, 1100, 150);    
     fill(0, 200);
-    resetMatrix();
   }
   
   public int getBackgroundIndex(){
@@ -77,7 +76,7 @@ import processing.sound.*;
   
   private void playSong(){
     if (songPreviews[backgroundIndex] != null) {
-          songPreviews[backgroundIndex].amp(volume); // set low volume
+          songPreviews[backgroundIndex].amp(0.5 * volume); // set low volume
           songPreviews[backgroundIndex].loop();
       }
   }
