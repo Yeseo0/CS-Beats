@@ -1,6 +1,8 @@
 // imports sound library
   import processing.sound.*;
   
+  static float volume = 0.3; // default volume
+  
   // images needed (backgrounds and arrows)
   PImage bg;
   PImage yellow, red, blue, green, arrowBar, quit;
@@ -151,12 +153,15 @@
     
     // volume kinda works (global)
     if (key == 'u') {
-      y.setVolume(Math.min(y.getVolume() + 0.1, 1.0));
+      volume = Math.min(volume + 0.1, 1.0);
+      if (currentScreen.equals("MainMenu")) y.setVolume(volume);
+      if (currentScreen.equals("Play")) z.setVolume(volume);
     }
     if (key == 'd') {
-      y.setVolume(Math.min(y.getVolume() - 0.1, 1.0));
+      volume = Math.max(volume - 0.1, 0.0);
+      if (currentScreen.equals("MainMenu")) y.setVolume(volume);
+      if (currentScreen.equals("Play")) z.setVolume(volume);
     }
-    System.out.println(y.getVolume());
     
     if (currentScreen.equals("Play") && key == CODED) {
       // need to edit so that all keypresseds are in the game sketch
