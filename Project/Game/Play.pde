@@ -48,7 +48,6 @@ public class Play{
       cooldown = 750;
       fall = 2940;
     }
-
   }
   
   void cooldownTime() {
@@ -65,7 +64,7 @@ public class Play{
     background(bg);
     arrow.drawBar();
     
-    if (showResults){
+    if (showResults && arrow.getTotalArrows() == 0){
       results();
     } else {
       generateArrow();
@@ -133,17 +132,20 @@ public class Play{
   }
   
   void displayScore(){
+    resetMatrix();
     fill(0, 200);
     rect(50, 45, 500, 105, 50);
     textFont(font);
     textSize(100);
     fill(255);
-    text("score: " + arrow.getScore(), 100, 120);
+    text("Score: " + arrow.getScore(), 100, 120);
     percent = 0;
+    resetMatrix();
   }
   
   // creates result screen
   void results(){
+    resetMatrix();
     fill(#000080, 200); 
     rect(300, 250, 1280, 400, 20);
     
@@ -151,11 +153,13 @@ public class Play{
     textSize(60);
     textFont(font);
     textAlign(CENTER, CENTER);
-    text("accuracy: " + (int) percent + "%", 950, 340);
-    text("stars earned: " + starsAdded, 950, 420);
-    text("total stars: " + (stars + starsAdded), 950, 500);
+    text("Accuracy: " + (int) percent + "%", 950, 340);
+    text("Stars Earned: " + starsAdded, 950, 420);
+    text("Total Stars: " + (stars + starsAdded), 950, 500);
   
-    text("click anywhere to return to song selection!", 925, 580);
+    text("Click anywhere to return to song selection!", 925, 580);
+    
+    resetMatrix();
   }
   
   Arrows getArrows(){

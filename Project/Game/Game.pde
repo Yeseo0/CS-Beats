@@ -65,6 +65,7 @@
     previews = new SoundFile[]{clarity, baab, ayby};
     
     x = new HomePage();
+    currentScreen = "HomePage";
     bg = home;
   }
   
@@ -91,20 +92,22 @@
    void mousePressed(){
     if (currentScreen.equals("HomePage") && mouseX >= 510 && mouseX <= 1245 && mouseY >= 755 && mouseY <= 965){
       y = new MainMenu(menuBackgrounds, previews, stars);
-      y.resetBackground();
       currentScreen = "MainMenu";
+      return;
      }
    if (currentScreen.equals("MainMenu") && mouseX >= 470 && mouseX <= 800 && mouseY >= 775 && mouseY <= 925){
     y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
     z = new Play(currentSong);
     bg = play;
     currentScreen = "Play";
+    return;
     }
     if (currentScreen.equals("MainMenu") && mouseX >= 1600 && mouseX <= 1725 && mouseY >= 65 && mouseY <= 185){
       y.getPreviewArray()[y.getLastBackgroundIndex()].stop();
       x = new HomePage();
       bg = home;
       currentScreen = "HomePage";
+      return;
     }
     if (currentScreen.equals("Play") && mouseX >= 1525 && mouseX <= 1795 && mouseY >= 5 && mouseY <= 140) {
       z.sample.cue(0);
@@ -114,6 +117,7 @@
       y.resetBackground();
       currentSong = 0;
       sample1 = new SoundFile(this,songChoice[currentSong].getRoute());
+      return;
     }
     if (currentScreen.equals("Play") && z.getResult()){
       stars += z.getStarsAdded();
@@ -122,10 +126,10 @@
       currentScreen = "MainMenu";
       y.resetBackground();
       currentSong = 0;
+      return;
     }
   }
 
-  
    void keyPressed(){
      
      // use setters as instance variables are private for class!!!
@@ -150,8 +154,9 @@
       y.setVolume(Math.min(y.getVolume() + 0.1, 1.0));
     }
     if (key == 'd') {
-      y.setVolume(Math.min(y.getVolume() + 0.1, 1.0));
+      y.setVolume(Math.min(y.getVolume() - 0.1, 1.0));
     }
+    System.out.println(y.getVolume());
     
     if (currentScreen.equals("Play") && key == CODED) {
       // need to edit so that all keypresseds are in the game sketch
